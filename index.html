@@ -1,1 +1,937 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8" data-next-head=""/><meta name="viewport" content="width=device-width, initial-scale=1.0" data-next-head=""/><link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicon/apple-icon-57x57.png" data-next-head=""/><link rel="apple-touch-icon-precomposed" sizes="60x60" href="/favicon/apple-icon-60x60.png" data-next-head=""/><link rel="apple-touch-icon-precomposed" sizes="72x72" href="/favicon/apple-icon-72x72.png" data-next-head=""/><link rel="apple-touch-icon-precomposed" sizes="76x76" href="/favicon/apple-icon-76x76.png" data-next-head=""/><link rel="apple-touch-icon-precomposed" sizes="114x114" href="/favicon/apple-icon-114x114.png" data-next-head=""/><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/favicon/apple-icon-120x120.png" data-next-head=""/><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon/apple-icon-144x144.png" data-next-head=""/><link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicon/apple-icon-152x152.png" data-next-head=""/><link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16" data-next-head=""/><link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32" data-next-head=""/><link rel="icon" type="image/png" href="/favicon/favicon-48x48.png" sizes="48x48" data-next-head=""/><link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" data-next-head=""/><link rel="icon" type="image/png" href="/favicon/favicon-128.png" sizes="128x128" data-next-head=""/><link rel="icon" type="image/png" href="/favicon/favicon-180x180.png" sizes="180x180" data-next-head=""/><link rel="icon" type="image/png" href="/favicon/favicon-196x196.png" sizes="196x196" data-next-head=""/><meta name="application-name" content="Supabase" data-next-head=""/><meta name="msapplication-TileColor" content="#1E1E1E" data-next-head=""/><meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png" data-next-head=""/><meta name="msapplication-square70x70logo" content="/favicon/mstile-70x70.png" data-next-head=""/><meta name="msapplication-square150x150logo" content="/favicon/mstile-150x150.png" data-next-head=""/><meta name="msapplication-wide310x150logo" content="/favicon/mstile-310x150.png" data-next-head=""/><meta name="msapplication-square310x310logo" content="/favicon/mstile-310x310.png" data-next-head=""/><meta name="theme-color" content="#1E1E1E" data-next-head=""/><link rel="shortcut icon" href="/favicon/favicon.ico" data-next-head=""/><link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" data-next-head=""/><link rel="apple-touch-icon" href="/favicon/favicon.ico" data-next-head=""/><link rel="alternate" type="application/rss+xml" href="/feed.xml" data-next-head=""/><link rel="manifest" href="/favicon/manifest.json" data-next-head=""/><meta name="msapplication-config" content="/favicon/browserconfig.xml" data-next-head=""/><title data-next-head="">Supabase | The Postgres Development Platform.</title><meta name="robots" content="index,follow" data-next-head=""/><meta name="description" content="Build production-grade applications with a Postgres database, Authentication, instant APIs, Realtime, Functions, Storage and Vector embeddings. Start for free." data-next-head=""/><meta name="twitter:card" content="summary_large_image" data-next-head=""/><meta name="twitter:site" content="@supabase" data-next-head=""/><meta name="twitter:creator" content="@supabase" data-next-head=""/><meta property="og:title" content="Supabase | The Postgres Development Platform." data-next-head=""/><meta property="og:description" content="Build production-grade applications with a Postgres database, Authentication, instant APIs, Realtime, Functions, Storage and Vector embeddings. Start for free." data-next-head=""/><meta property="og:url" content="https://supabase.com/" data-next-head=""/><meta property="og:type" content="website" data-next-head=""/><meta property="og:image" content="https://supabase.com/images/og/supabase-og.png" data-next-head=""/><meta property="og:image:alt" content="Supabase Og Image" data-next-head=""/><meta property="og:image:width" content="800" data-next-head=""/><meta property="og:image:height" content="600" data-next-head=""/><meta property="og:site_name" content="Supabase" data-next-head=""/><link data-next-font="" rel="preconnect" href="/" crossorigin="anonymous"/><link rel="preload" href="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/css/bac820e251e4b412.css?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" as="style"/><link rel="stylesheet" href="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/css/bac820e251e4b412.css?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/polyfills-42372ed130431b0a.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW"></script><script defer="" src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/6394-71ac8f776f139fce.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW"></script><script defer="" src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/4290-41479c36cf7326cc.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW"></script><script defer="" src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/2548.3bb75b653e0a7377.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW"></script><script defer="" src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/2461-2051c45822b73929.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW"></script><script defer="" src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/83.ea2dc3985567b40d.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW"></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/webpack-3f745e45ee16f846.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/framework-9ae46c84f33751f1.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/main-405c82567af1208e.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/pages/_app-e22c06b23bb5502e.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/955-39497b4d85211988.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/8421-52c4e83d1981aabb.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/3067-f09f61123bebb80e.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/3772-ad96dcd51a48c895.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/3019-ed89b7344ee64aea.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/9145-2e4598c94b6b4fab.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/chunks/pages/404-e01258cd3440b51f.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/CEcg-SfrdU9UNldszwvBu/_buildManifest.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script><script src="https://frontend-assets.supabase.com/www/502c098d90a4/_next/static/CEcg-SfrdU9UNldszwvBu/_ssgManifest.js?dpl=dpl_9rSjsSBqmTuQJyu8VFw6HRMSM9FW" defer=""></script></head><body><div id="__next"><script type="application/json" data-flag-values="true">{}</script><script>!function(){try{var d=document.documentElement,n='data-theme',s='setAttribute';var e=localStorage.getItem('theme');if('system'===e||(!e&&false)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme = 'dark';d[s](n,'dark')}else{d.style.colorScheme = 'light';d[s](n,'light')}}else if(e){d[s](n,e|| '')}else{d[s](n,'dark')}if(e==='light'||e==='dark'||!e)d.style.colorScheme=e||'dark'}catch(e){}}()</script><main class="relative min-h-screen"><div class="relative mx-auto flex h-screen w-full flex-col items-center justify-center"><div class="absolute top-0 mx-auto w-full max-w-7xl px-8 pt-6 sm:px-6 lg:px-8"><nav class="relative flex items-center justify-between sm:h-10"><div class="flex flex-shrink-0 flex-grow items-center lg:flex-grow-0"><div class="flex w-full items-center justify-between md:w-auto"><a href="/"><img alt="supabase logo" loading="lazy" width="120" height="24" decoding="async" data-nimg="1" style="color:transparent" srcSet="/_next/image?url=https%3A%2F%2Ffrontend-assets.supabase.com%2Fwww%2F502c098d90a4%2F_next%2Fstatic%2Fmedia%2Fsupabase-logo-wordmark--light.daaeffd3.png&amp;w=128&amp;q=75 1x, /_next/image?url=https%3A%2F%2Ffrontend-assets.supabase.com%2Fwww%2F502c098d90a4%2F_next%2Fstatic%2Fmedia%2Fsupabase-logo-wordmark--light.daaeffd3.png&amp;w=256&amp;q=75 2x" src="/_next/image?url=https%3A%2F%2Ffrontend-assets.supabase.com%2Fwww%2F502c098d90a4%2F_next%2Fstatic%2Fmedia%2Fsupabase-logo-wordmark--light.daaeffd3.png&amp;w=256&amp;q=75"/></a></div></div></nav></div><div class="absolute"><h1 class="text-foreground select-none text-[14rem] opacity-[5%] filter transition duration-200 sm:text-[18rem] lg:text-[28rem] blur-none">404</h1></div><div class="flex flex-col items-center justify-center space-y-6 transition opacity-0"><div class="text-foreground flex w-[320px] flex-col items-center justify-center space-y-3"><h1 class="m-2 text-2xl">Looking for something? 🔍</h1><p class="text-center text-sm">We couldn&#x27;t find the page that you&#x27;re looking for!</p></div><div class="flex items-center space-x-4"><a data-size="small" type="button" class="relative justify-center cursor-pointer inline-flex items-center space-x-2 text-center font-regular ease-out duration-200 rounded-md outline-none transition-all outline-0 focus-visible:outline-4 focus-visible:outline-offset-1 border bg-brand-400 dark:bg-brand-500 hover:bg-brand/80 dark:hover:bg-brand/50 border-brand-500/75 dark:border-brand/30 hover:border-brand-600 dark:hover:border-brand focus-visible:outline-brand-600 data-[state=open]:bg-brand-400/80 dark:data-[state=open]:bg-brand-500/80 data-[state=open]:outline-brand-600 text-base md:text-sm leading-4 px-3 py-2 h-[34px] text-white" tabindex="0" href="/"><span class="truncate">Head back</span></a></div></div></div></main></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{}},"page":"/404","query":{},"buildId":"CEcg-SfrdU9UNldszwvBu","assetPrefix":"https://frontend-assets.supabase.com/www/502c098d90a4","nextExport":true,"autoExport":true,"isFallback":false,"dynamicIds":[83],"scriptLoader":[]}</script></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nomos Universe — Espace Client</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080808; --bg2: #111111; --bg3: #1a1a1a; --border: #222222;
+      --gold: #C9A96E; --gold2: #E8C98A; --white: #FFFFFF; --gray: #888888;
+      --gray2: #555555; --green: #4CAF50; --red: #E53935; --blue: #2196F3;
+      --radius: 12px; --radius-sm: 8px; --transition: 0.25s ease;
+    }
+    html, body { height: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--white); }
+    body { min-height: 100vh; }
+    a { color: var(--gold); text-decoration: none; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+    input, select, textarea { font-family: inherit; }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .hidden { display: none !important; }
+    .logo { font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 400; }
+    .logo-sub { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-top: 2px; }
+    h1 { font-size: 28px; font-weight: 300; letter-spacing: 1px; }
+    h2 { font-size: 20px; font-weight: 400; }
+    h3 { font-size: 16px; font-weight: 500; }
+    p { line-height: 1.6; color: var(--gray); font-size: 14px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; border-radius: var(--radius-sm); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; transition: var(--transition); }
+    .btn-gold { background: var(--gold); color: #000; }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+    .btn-outline:hover { background: rgba(201,169,110,0.1); }
+    .btn-ghost { background: transparent; color: var(--gray); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--gray2); color: var(--white); }
+    .btn-sm { padding: 7px 14px; font-size: 11px; }
+    .btn-danger { background: rgba(229,57,53,0.15); color: var(--red); border: 1px solid rgba(229,57,53,0.3); }
+    .btn-danger:hover { background: rgba(229,57,53,0.25); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+    .field input, .field select, .field textarea { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--white); padding: 12px 16px; font-size: 14px; outline: none; transition: border-color var(--transition); }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold); }
+    .field textarea { resize: vertical; min-height: 80px; }
+    .field select option { background: var(--bg3); }
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; }
+    .badge-gold { background: rgba(201,169,110,0.15); color: var(--gold); border: 1px solid rgba(201,169,110,0.3); }
+    .badge-green { background: rgba(76,175,80,0.15); color: var(--green); border: 1px solid rgba(76,175,80,0.3); }
+    .badge-gray { background: var(--bg3); color: var(--gray); border: 1px solid var(--border); }
+    .badge-red { background: rgba(229,57,53,0.15); color: var(--red); border: 1px solid rgba(229,57,53,0.3); }
+    #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+    .toast { padding: 14px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 10px; min-width: 280px; animation: slideIn 0.3s ease; }
+    .toast-success { background: rgba(76,175,80,0.95); color: #fff; }
+    .toast-error { background: rgba(229,57,53,0.95); color: #fff; }
+    .toast-info { background: rgba(33,150,243,0.95); color: #fff; }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    #loading-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px; z-index: 1000; }
+    .spinner { width: 36px; height: 36px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    /* LOGIN */
+    #page-login { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 70%), var(--bg); }
+    .login-box { width: 100%; max-width: 420px; }
+    .login-header { text-align: center; margin-bottom: 40px; }
+    .login-header .divider-line { width: 40px; height: 1px; background: var(--gold); margin: 16px auto; opacity: 0.5; }
+    .login-form { display: flex; flex-direction: column; gap: 18px; }
+    .login-form .btn { width: 100%; justify-content: center; padding: 14px; }
+    /* PORTAL */
+    #page-portal { min-height: 100vh; display: flex; flex-direction: column; }
+    .portal-header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .portal-body { flex: 1; max-width: 1100px; width: 100%; margin: 0 auto; padding: 40px 32px; }
+    .project-hero { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    .project-hero h1 { font-size: 30px; font-weight: 300; margin-bottom: 8px; }
+    .phases-title { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 20px; }
+    .phases-grid { display: grid; gap: 2px; }
+    .phase-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; transition: var(--transition); }
+    .phase-item.completed { border-color: rgba(76,175,80,0.3); }
+    .phase-item.locked { opacity: 0.6; }
+    .phase-header { display: flex; align-items: center; gap: 16px; padding: 18px 20px; cursor: pointer; user-select: none; }
+    .phase-header:hover { background: rgba(255,255,255,0.02); }
+    .phase-num { width: 32px; height: 32px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--gray); flex-shrink: 0; }
+    .phase-item.completed .phase-num { background: rgba(76,175,80,0.2); border-color: var(--green); color: var(--green); }
+    .phase-info { flex: 1; }
+    .phase-label { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+    .phase-desc { font-size: 12px; color: var(--gray); }
+    .phase-chevron { color: var(--gray2); transition: transform var(--transition); font-size: 18px; }
+    .phase-item.open .phase-chevron { transform: rotate(180deg); }
+    .phase-content { padding: 0 20px 20px 68px; display: none; }
+    .phase-item.open .phase-content { display: block; }
+    .lock-overlay { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: var(--bg3); border-radius: var(--radius-sm); }
+    .lock-overlay span { font-size: 13px; color: var(--gray); }
+    .docs-grid { display: flex; flex-direction: column; gap: 8px; }
+    .doc-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); transition: var(--transition); }
+    .doc-item:hover { border-color: var(--gray2); }
+    .doc-icon { width: 36px; height: 36px; border-radius: 6px; background: rgba(201,169,110,0.12); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .doc-info { flex: 1; min-width: 0; }
+    .doc-title { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .doc-meta { font-size: 11px; color: var(--gray); margin-top: 2px; }
+    .doc-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .docs-empty { padding: 20px; text-align: center; color: var(--gray); font-size: 13px; }
+    .special-items { margin-bottom: 12px; display: grid; gap: 6px; }
+    .special-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bg3); border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 13px; }
+    .status-bar { display: flex; gap: 4px; margin-top: 20px; }
+    .status-dot { flex: 1; height: 4px; border-radius: 2px; background: var(--bg3); }
+    .status-dot.done { background: var(--green); }
+    .status-dot.current { background: var(--gold); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+    /* PDF MODAL */
+    #pdf-modal { position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); padding: 20px; }
+    .pdf-modal-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); width: 100%; max-width: 900px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
+    .pdf-modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .pdf-modal-body { flex: 1; overflow: auto; background: #1a1a1a; }
+    .pdf-modal-body iframe { width: 100%; height: 70vh; border: none; display: block; }
+    .close-btn { background: none; border: none; color: var(--gray); font-size: 20px; cursor: pointer; padding: 4px; }
+    .close-btn:hover { color: var(--white); }
+    /* ADMIN */
+    #page-admin { min-height: 100vh; display: flex; flex-direction: column; }
+    .admin-header { background: linear-gradient(to right, var(--bg2), rgba(201,169,110,0.05)); border-bottom: 1px solid var(--border); padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .admin-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; background: rgba(201,169,110,0.2); color: var(--gold); border: 1px solid rgba(201,169,110,0.3); }
+    .admin-body { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 32px; }
+    .admin-tabs { display: flex; gap: 2px; margin-bottom: 28px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; width: fit-content; }
+    .admin-tab { padding: 8px 20px; border-radius: 6px; font-size: 13px; cursor: pointer; transition: var(--transition); background: transparent; color: var(--gray); }
+    .admin-tab.active { background: var(--gold); color: #000; font-weight: 600; }
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; }
+    .stat-value { font-size: 28px; font-weight: 300; color: var(--gold); }
+    .stat-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+    .panel { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; }
+    .panel-title { font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+    .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .panel-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .client-list { display: grid; gap: 8px; }
+    .client-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 20px; display: flex; align-items: center; gap: 16px; transition: var(--transition); }
+    .client-card:hover { border-color: var(--gray2); }
+    .client-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(201,169,110,0.2); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--gold); font-weight: 600; flex-shrink: 0; }
+    .client-card-info { flex: 1; }
+    .client-card-name { font-size: 14px; font-weight: 500; }
+    .client-card-email { font-size: 12px; color: var(--gray); }
+    .phase-config-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 6px; }
+    .phase-config-item .pc-label { flex: 1; font-size: 13px; }
+    .pc-controls { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .toggle-group { display: flex; align-items: center; gap: 6px; }
+    .toggle-group label { font-size: 11px; color: var(--gray); white-space: nowrap; }
+    .toggle-switch { position: relative; display: inline-block; width: 40px; height: 22px; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; cursor: pointer; inset: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 22px; transition: var(--transition); }
+    .toggle-slider::before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background: var(--gray2); border-radius: 50%; transition: var(--transition); }
+    .toggle-switch input:checked + .toggle-slider { background: rgba(201,169,110,0.3); border-color: var(--gold); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(18px); background: var(--gold); }
+    .upload-area { border: 2px dashed var(--border); border-radius: var(--radius-sm); padding: 32px; text-align: center; cursor: pointer; transition: var(--transition); }
+    .upload-area:hover, .upload-area.drag-over { border-color: var(--gold); background: rgba(201,169,110,0.04); }
+    .upload-area input[type="file"] { display: none; }
+    .project-select-row { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; }
+    .project-select-row select { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--white); padding: 8px 14px; font-size: 13px; outline: none; flex: 1; }
+    .empty-state { text-align: center; padding: 48px 24px; color: var(--gray); }
+    .empty-state .es-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
+    .empty-state h3 { color: var(--white); margin-bottom: 8px; font-size: 16px; }
+    .section-title { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 16px; }
+    .divider { height: 1px; background: var(--border); margin: 24px 0; }
+    .divider-text { display: flex; align-items: center; gap: 12px; color: var(--gray2); font-size: 12px; margin: 20px 0; }
+    .divider-text::before, .divider-text::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .phase-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; background: rgba(201,169,110,0.15); color: var(--gold); margin-left: 6px; }
+    .upload-progress { margin-top: 12px; background: var(--bg3); border-radius: 4px; overflow: hidden; height: 4px; }
+    .upload-progress-bar { height: 100%; background: var(--gold); transition: width 0.3s; width: 0%; }
+    @media (max-width: 768px) {
+      .portal-header, .admin-header { padding: 0 16px; }
+      .portal-body, .admin-body { padding: 20px 16px; }
+      .phase-content { padding-left: 20px; }
+      .panel-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2,1fr); }
+      .pc-controls { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loading-screen">
+  <div style="text-align:center">
+    <p class="logo" style="font-size:16px;letter-spacing:8px">NOMOS</p>
+    <p class="logo-sub">UNIVERSE</p>
+  </div>
+  <div class="spinner"></div>
+</div>
+
+<!-- TOASTS -->
+<div id="toast-container"></div>
+
+<!-- ===== LOGIN ===== -->
+<div id="page-login" class="hidden">
+  <div id="page-login" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at 50% 0%,rgba(201,169,110,0.08) 0%,transparent 70%),#080808">
+    <div class="login-box">
+      <div class="login-header">
+        <p class="logo" style="font-size:15px;letter-spacing:6px">NOMOS UNIVERSE</p>
+        <div class="divider-line" style="width:40px;height:1px;background:var(--gold);margin:14px auto;opacity:0.5"></div>
+        <p class="logo-sub" style="font-size:11px;letter-spacing:3px">ESPACE CLIENT</p>
+        <div style="margin-top:32px">
+          <h1 style="font-size:24px;font-weight:300;color:var(--white)">Connexion</h1>
+          <p style="margin-top:8px;font-size:13px">Accédez à votre espace projet personnalisé</p>
+        </div>
+      </div>
+      <div class="login-form">
+        <div class="field">
+          <label>Adresse email</label>
+          <input type="email" id="login-email" placeholder="votre@email.com" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label>Mot de passe</label>
+          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+        <button class="btn btn-gold" id="login-btn" onclick="doLogin()">
+          <span id="login-btn-text">Se connecter</span>
+        </button>
+        <div id="login-error" class="hidden" style="background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.3);border-radius:8px;padding:12px 16px;font-size:13px;color:#E53935;text-align:center"></div>
+      </div>
+      <div style="text-align:center;margin-top:24px;font-size:12px;color:var(--gray2)">
+        Mot de passe oublié ? Contactez <a href="mailto:contact@nomosuniverse.com">contact@nomosuniverse.com</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CLIENT PORTAL ===== -->
+<div id="page-portal" class="hidden">
+  <header class="portal-header">
+    <div style="display:flex;align-items:center;gap:20px">
+      <div><p class="logo" style="font-size:12px;letter-spacing:4px">NOMOS UNIVERSE</p><p class="logo-sub">ESPACE CLIENT</p></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span style="font-size:13px;color:var(--gray)">Bonjour, <strong id="portal-client-name" style="color:var(--white)">—</strong></span>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()">Déconnexion</button>
+    </div>
+  </header>
+  <div class="portal-body">
+    <div class="project-hero">
+      <h1 id="portal-project-name">Chargement…</h1>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:6px">
+        <span id="portal-project-address" style="font-size:13px;color:var(--gray)"></span>
+        <span id="portal-project-status" class="badge badge-gold"></span>
+      </div>
+      <div class="status-bar" id="progress-bar"></div>
+    </div>
+    <p class="phases-title">Suivi de votre projet</p>
+    <div class="phases-grid" id="phases-container"></div>
+  </div>
+</div>
+
+<!-- ===== PDF MODAL ===== -->
+<div id="pdf-modal" class="hidden">
+  <div class="pdf-modal-box">
+    <div class="pdf-modal-header">
+      <span style="font-size:14px;font-weight:500" id="pdf-modal-title">Document</span>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-outline btn-sm" id="pdf-download-btn">⬇ Télécharger</button>
+        <button class="close-btn" onclick="closePdfModal()">✕</button>
+      </div>
+    </div>
+    <div class="pdf-modal-body">
+      <iframe id="pdf-frame" src="" title="Visionneuse PDF"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ADMIN ===== -->
+<div id="page-admin" class="hidden">
+  <header class="admin-header">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div><p class="logo" style="font-size:12px;letter-spacing:4px">NOMOS UNIVERSE</p><p class="logo-sub">ADMINISTRATION</p></div>
+      <span class="admin-badge">Admin</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span style="font-size:13px;color:var(--gray)" id="admin-user-email"></span>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()">Déconnexion</button>
+    </div>
+  </header>
+  <div class="admin-body">
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-value" id="stat-clients">—</div><div class="stat-label">Clients</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-projects">—</div><div class="stat-label">Projets</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-docs">—</div><div class="stat-label">Documents</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-phases">—</div><div class="stat-label">Phases actives</div></div>
+    </div>
+    <!-- Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('clients',this)">👥 Clients</button>
+      <button class="admin-tab" onclick="switchAdminTab('project',this)">📁 Projet</button>
+      <button class="admin-tab" onclick="switchAdminTab('phases',this)">🗂 Phases</button>
+      <button class="admin-tab" onclick="switchAdminTab('documents',this)">📄 Documents</button>
+    </div>
+
+    <!-- TAB: CLIENTS -->
+    <div id="admin-tab-clients">
+      <div class="panel">
+        <div class="panel-title">➕ Nouveau client</div>
+        <div class="panel-grid">
+          <div class="field"><label>Nom complet *</label><input type="text" id="nc-name" placeholder="Marie Dupont" /></div>
+          <div class="field"><label>Email (identifiant) *</label><input type="email" id="nc-email" placeholder="marie@exemple.com" /></div>
+          <div class="field"><label>Téléphone</label><input type="text" id="nc-phone" placeholder="+33 6 12 34 56 78" /></div>
+          <div class="field"><label>Ville / Adresse client</label><input type="text" id="nc-address" placeholder="Paris, France" /></div>
+        </div>
+        <div class="field" style="margin-top:12px"><label>Notes internes</label><textarea id="nc-notes" placeholder="Notes sur ce client…"></textarea></div>
+        <div class="divider-text">Projet associé</div>
+        <div class="panel-grid">
+          <div class="field"><label>Nom du projet *</label><input type="text" id="nc-proj-name" placeholder="Rénovation Appartement Paris 11" /></div>
+          <div class="field"><label>Adresse du bien</label><input type="text" id="nc-proj-addr" placeholder="15 rue Exemple, 75011 Paris" /></div>
+        </div>
+        <div class="field" style="margin-top:12px"><label>Mot de passe temporaire *</label><input type="text" id="nc-password" placeholder="Minimum 8 caractères" /></div>
+        <div class="panel-actions">
+          <button class="btn btn-ghost" onclick="clearClientForm()">Effacer</button>
+          <button class="btn btn-gold" onclick="createClient()">✓ Créer le client</button>
+        </div>
+      </div>
+      <p class="section-title">Clients existants</p>
+      <div class="client-list" id="admin-client-list">
+        <div class="empty-state"><div class="es-icon">👥</div><h3>Aucun client</h3><p>Créez votre premier client ci-dessus.</p></div>
+      </div>
+    </div>
+
+    <!-- TAB: PROJECT -->
+    <div id="admin-tab-project" class="hidden">
+      <div class="project-select-row">
+        <select id="proj-select-project" onchange="onProjectTabChange()"><option value="">— Sélectionner un projet —</option></select>
+        <button class="btn btn-ghost btn-sm" onclick="loadAdminProjectSelects()">↻</button>
+      </div>
+      <div id="project-edit-panel" class="hidden">
+        <div class="panel">
+          <div class="panel-title">✏️ Modifier le projet</div>
+          <div class="panel-grid">
+            <div class="field"><label>Nom du projet</label><input type="text" id="ep-name" /></div>
+            <div class="field"><label>Adresse du bien</label><input type="text" id="ep-addr" /></div>
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label>Statut</label>
+            <select id="ep-status">
+              <option value="en_cours">En cours</option>
+              <option value="pause">En pause</option>
+              <option value="termine">Terminé</option>
+              <option value="suspendu">Suspendu</option>
+            </select>
+          </div>
+          <div class="field" style="margin-top:12px"><label>Description</label><textarea id="ep-desc"></textarea></div>
+          <div class="panel-actions"><button class="btn btn-gold" onclick="saveProject()">Enregistrer</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: PHASES -->
+    <div id="admin-tab-phases" class="hidden">
+      <div class="project-select-row">
+        <select id="phases-project-select" onchange="onPhasesProjectChange()"><option value="">— Sélectionner un projet —</option></select>
+      </div>
+      <div id="phases-config-panel" class="hidden">
+        <div class="panel">
+          <div class="panel-title">🗂 Configuration des phases</div>
+          <p style="font-size:13px;color:var(--gray);margin-bottom:16px">Activez, verrouillez ou marquez les phases comme terminées. Les phases désactivées sont masquées pour le client.</p>
+          <div id="phase-config-grid"></div>
+          <div class="panel-actions"><button class="btn btn-gold" onclick="savePhaseConfigs()">✓ Enregistrer les phases</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: DOCUMENTS -->
+    <div id="admin-tab-documents" class="hidden">
+      <div class="project-select-row">
+        <select id="docs-proj-select" onchange="onDocsProjectChange()"><option value="">— Sélectionner un projet —</option></select>
+        <select id="docs-phase-select" onchange="loadAdminDocs()" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--white);padding:8px 14px;font-size:13px;outline:none;flex:1"><option value="">— Phase —</option></select>
+      </div>
+      <div id="docs-upload-panel" class="hidden">
+        <div class="panel">
+          <div class="panel-title">⬆️ Ajouter un document</div>
+          <div class="panel-grid">
+            <div class="field"><label>Titre *</label><input type="text" id="doc-title" placeholder="Planche tendance – Salon" /></div>
+            <div class="field"><label>Type</label>
+              <select id="doc-type">
+                <option value="pdf">Document PDF</option>
+                <option value="plan_2d">Plan 2D</option>
+                <option value="shopping_liste">Shopping Liste</option>
+                <option value="planning_travaux">Planning Travaux</option>
+                <option value="devis">Devis</option>
+                <option value="facture">Facture</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin-top:10px"><label>Description (optionnel)</label><input type="text" id="doc-desc" placeholder="Description courte…" /></div>
+          <div class="upload-area" id="upload-area" onclick="document.getElementById('doc-file-input').click()" ondragover="e=>{e.preventDefault();document.getElementById('upload-area').classList.add('drag-over')}" ondragleave="document.getElementById('upload-area').classList.remove('drag-over')" ondrop="onFileDrop(event)">
+            <input type="file" id="doc-file-input" accept=".pdf,.png,.jpg,.jpeg,.zip" onchange="onFileSelected(event)" />
+            <div style="font-size:32px;margin-bottom:10px">📎</div>
+            <div style="font-size:14px;color:var(--gray)">Cliquez ou glissez un fichier ici</div>
+            <div style="font-size:12px;color:var(--gray2);margin-top:6px">PDF, PNG, JPG, ZIP — Max 50MB</div>
+            <div id="selected-file-name" style="margin-top:10px;font-size:13px;color:var(--gold);font-weight:500"></div>
+            <div class="upload-progress" id="upload-progress" style="display:none;margin-top:10px"><div class="upload-progress-bar" id="upload-progress-bar"></div></div>
+          </div>
+          <div class="panel-actions"><button class="btn btn-gold" id="upload-btn" onclick="uploadDocument()">⬆ Uploader</button></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">📄 Documents de la phase</div>
+          <div id="admin-docs-list"><div class="docs-empty">Sélectionnez un projet et une phase.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const SUPABASE_URL  = 'https://tccxnavtwzkpmpbvevcc.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjY3huYXZ0d3prcG1wYnZldmNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNDUwNTUsImV4cCI6MjA5MjYyMTA1NX0.zYkfUZqTb58vGw8DwIPCTSOMisl-x2GLfBuiSJvBFiQ';
+const SUPABASE_SVC  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjY3huYXZ0d3prcG1wYnZldmNjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NzA0NTA1NSwiZXhwIjoyMDkyNjIxMDU1fQ.MUi3ZM5jxxoEvCNEx25sWAyGT_G-tK38hSzmJhmLiUw';
+
+const PHASES = [
+  { key:'call_cadrage',          label:'Call Cadrage',               icon:'📞', desc:'Premier échange pour cerner votre projet et vos attentes' },
+  { key:'visite_bien',           label:'Visite du Bien',             icon:'🏠', desc:'Visite sur place et prise de mesures de votre espace' },
+  { key:'clarte_deco',           label:'Clarté Déco',                icon:'✨', desc:'Séance visio pour définir votre style et votre identité déco' },
+  { key:'paiement_confirmation', label:'Paiement & Confirmation',    icon:'✅', desc:"Validation du devis et versement de l'acompte" },
+  { key:'validation_devis',      label:'Validation Devis Travaux',   icon:'📋', desc:'Présentation et validation du devis pour les travaux' },
+  { key:'conception_3d',         label:'Projection 3D & Conception', icon:'🎨', desc:'Planches ambiance, projections 3D, plan 2D et shopping liste' },
+  { key:'travaux',               label:'Travaux',                    icon:'🔨', desc:'Réalisation des travaux selon le planning établi' },
+  { key:'livraison',             label:'Livraison du Chantier',      icon:'🎁', desc:'Livraison et réception officielle de votre espace rénové' },
+  { key:'installation',          label:'Installation',               icon:'🪴', desc:'Installation du mobilier et accessoires (option)' },
+];
+const SPECIAL = { conception_3d:['plan_2d','shopping_liste'], travaux:['planning_travaux'] };
+const STATUS_LABELS = { en_cours:'En cours', termine:'Terminé', suspendu:'Suspendu', pause:'En pause' };
+const DOC_ICONS = { pdf:'📄', plan_2d:'📐', shopping_liste:'🛒', planning_travaux:'📅', devis:'📋', facture:'🧾', autre:'📎' };
+
+// ============================================================
+// STATE
+// ============================================================
+let sb, sbAdmin, currentUser, isAdmin = false;
+let clientData, projectData;
+let phaseMap = {}, docsMap = {};
+let adminProjects = [], selectedProjId = null, selectedFile = null;
+const isAdminMode = location.search.includes('admin') || location.hash === '#admin';
+
+// ============================================================
+// INIT
+// ============================================================
+async function init() {
+  try {
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON, { auth:{ persistSession:true, storageKey:'nomos-v2' } });
+    if (isAdminMode) sbAdmin = supabase.createClient(SUPABASE_URL, SUPABASE_SVC, { auth:{ persistSession:false, autoRefreshToken:false } });
+    const { data:{ session } } = await sb.auth.getSession();
+    if (session) { currentUser = session.user; await routeUser(); }
+    else showPage('login');
+  } catch(e) { console.error(e); showPage('login'); }
+}
+
+async function routeUser() {
+  const { data:adminRow } = await sb.from('admins').select('id').eq('auth_user_id', currentUser.id).maybeSingle();
+  if (adminRow) {
+    isAdmin = true;
+    document.getElementById('admin-user-email').textContent = currentUser.email;
+    showPage('admin');
+    await loadAdminData();
+  } else {
+    await loadClientPortal();
+  }
+}
+
+// ============================================================
+// AUTH
+// ============================================================
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-password').value;
+  const btn   = document.getElementById('login-btn');
+  const errEl = document.getElementById('login-error');
+  if (!email || !pass) { showLoginErr('Veuillez remplir tous les champs.'); return; }
+  btn.disabled = true; document.getElementById('login-btn-text').textContent = 'Connexion…'; errEl.classList.add('hidden');
+  const { data, error } = await sb.auth.signInWithPassword({ email, password:pass });
+  if (error) { btn.disabled=false; document.getElementById('login-btn-text').textContent='Se connecter'; showLoginErr('Email ou mot de passe incorrect.'); return; }
+  currentUser = data.user;
+  await routeUser();
+}
+function showLoginErr(msg) { const e=document.getElementById('login-error'); e.textContent=msg; e.classList.remove('hidden'); }
+async function doLogout() {
+  await sb.auth.signOut();
+  currentUser=null; isAdmin=false; clientData=null; projectData=null; phaseMap={}; docsMap={};
+  showPage('login');
+}
+document.addEventListener('keydown', e => { if(e.key==='Enter' && !document.getElementById('page-login').classList.contains('hidden')) doLogin(); });
+
+// ============================================================
+// CLIENT PORTAL
+// ============================================================
+async function loadClientPortal() {
+  showPage('portal');
+  const { data:client } = await sb.from('clients').select('*').eq('auth_user_id', currentUser.id).maybeSingle();
+  if (!client) { toast('Profil client introuvable.','error'); return; }
+  clientData = client;
+  document.getElementById('portal-client-name').textContent = client.full_name;
+
+  const { data:projects } = await sb.from('projects').select('*').eq('client_id', client.id).order('created_at');
+  if (!projects?.length) { document.getElementById('portal-project-name').textContent='Aucun projet actif'; return; }
+  projectData = projects[0];
+  document.getElementById('portal-project-name').textContent = projectData.name;
+  document.getElementById('portal-project-address').textContent = projectData.property_address || '';
+  const sEl = document.getElementById('portal-project-status');
+  sEl.textContent = STATUS_LABELS[projectData.status] || projectData.status;
+  sEl.className = `badge ${projectData.status==='termine'?'badge-green':'badge-gold'}`;
+
+  const { data:pcs } = await sb.from('phase_configs').select('*').eq('project_id', projectData.id);
+  phaseMap = {};
+  (pcs||[]).forEach(pc => phaseMap[pc.phase_key]=pc);
+
+  const { data:docs } = await sb.from('documents').select('*').eq('project_id', projectData.id).order('sort_order');
+  docsMap = {};
+  (docs||[]).forEach(d => { if(!docsMap[d.phase_key]) docsMap[d.phase_key]=[]; docsMap[d.phase_key].push(d); });
+
+  renderProgressBar();
+  renderPhases();
+}
+
+function renderProgressBar() {
+  const bar = document.getElementById('progress-bar');
+  bar.innerHTML = '';
+  let foundCurrent = false;
+  PHASES.forEach(ph => {
+    const cfg = phaseMap[ph.key];
+    if (cfg && !cfg.is_enabled) return;
+    const dot = document.createElement('div');
+    dot.className = 'status-dot';
+    if (cfg?.is_completed) dot.classList.add('done');
+    else if (!foundCurrent && cfg && !cfg.is_locked) { dot.classList.add('current'); foundCurrent=true; }
+    bar.appendChild(dot);
+  });
+}
+
+function renderPhases() {
+  const c = document.getElementById('phases-container');
+  c.innerHTML = '';
+  let num = 0;
+  PHASES.forEach(ph => {
+    const cfg = phaseMap[ph.key];
+    const enabled   = cfg ? cfg.is_enabled   : true;
+    const locked    = cfg ? cfg.is_locked    : false;
+    const completed = cfg ? cfg.is_completed : false;
+    if (!enabled) return;
+    num++;
+    const pDocs = docsMap[ph.key] || [];
+    const specTypes = SPECIAL[ph.key] || [];
+
+    let bodyHTML = '';
+    if (locked) {
+      bodyHTML = `<div class="lock-overlay"><span style="font-size:20px">🔒</span><span>Cette phase n'est pas encore accessible. Contactez votre designer pour plus d'informations.</span></div>`;
+    } else {
+      // Special items
+      if (specTypes.length) {
+        bodyHTML += '<div class="special-items">';
+        if (specTypes.includes('plan_2d')) {
+          const d = pDocs.find(x=>x.doc_type==='plan_2d');
+          bodyHTML += d
+            ? `<div class="special-item"><span style="font-size:18px">📐</span><span style="flex:1"><strong>Plan 2D</strong> — ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
+            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">📐</span><span>Plan 2D — En cours de préparation</span></div>`;
+        }
+        if (specTypes.includes('shopping_liste')) {
+          const d = pDocs.find(x=>x.doc_type==='shopping_liste');
+          bodyHTML += d
+            ? `<div class="special-item"><span style="font-size:18px">🛒</span><span style="flex:1"><strong>Shopping Liste</strong> — ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
+            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">🛒</span><span>Shopping Liste — En cours de préparation</span></div>`;
+        }
+        if (specTypes.includes('planning_travaux')) {
+          const d = pDocs.find(x=>x.doc_type==='planning_travaux');
+          bodyHTML += d
+            ? `<div class="special-item"><span style="font-size:18px">📅</span><span style="flex:1"><strong>Planning Travaux</strong> — ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
+            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">📅</span><span>Planning Travaux — En cours de préparation</span></div>`;
+        }
+        bodyHTML += '</div>';
+      }
+      // Docs
+      const mainDocs = pDocs.filter(d => !specTypes.includes(d.doc_type) || specTypes.length===0);
+      if (mainDocs.length) {
+        bodyHTML += '<div class="docs-grid">';
+        mainDocs.forEach(d => {
+          const icon = DOC_ICONS[d.doc_type]||'📄';
+          const size = d.file_size ? fmtBytes(d.file_size) : '';
+          bodyHTML += `<div class="doc-item">
+            <div class="doc-icon">${icon}</div>
+            <div class="doc-info"><div class="doc-title">${d.title}</div><div class="doc-meta">${d.description||''} ${size?'· '+size:''}</div></div>
+            <div class="doc-actions">
+              <button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">👁 Voir</button>
+              <button class="btn btn-ghost btn-sm" onclick="downloadDoc('${d.id}','${esc(d.file_name||d.title)}')">⬇</button>
+            </div>
+          </div>`;
+        });
+        bodyHTML += '</div>';
+        if (mainDocs.length > 1) {
+          bodyHTML += `<div style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="downloadAll('${ph.key}')">⬇ Tout télécharger</button></div>`;
+        }
+      } else if (!specTypes.length) {
+        bodyHTML += `<div class="docs-empty">Aucun document disponible pour cette phase.</div>`;
+      }
+    }
+
+    const item = document.createElement('div');
+    item.className = `phase-item${completed?' completed':''}${locked?' locked':''}`;
+    item.id = `ph-${ph.key}`;
+    item.innerHTML = `
+      <div class="phase-header" onclick="${locked?'':` togglePhase('${ph.key}')`}">
+        <div class="phase-num">${completed?'✓':num}</div>
+        <div class="phase-info">
+          <div class="phase-label">${ph.icon} ${ph.label}</div>
+          <div class="phase-desc">${ph.desc}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          ${locked ? '<span>🔒</span>' : ''}
+          ${completed ? '<span class="badge badge-green">✓ Terminé</span>' : ''}
+          ${!locked ? '<span class="phase-chevron">⌄</span>' : ''}
+        </div>
+      </div>
+      <div class="phase-content">${bodyHTML}</div>`;
+    c.appendChild(item);
+  });
+}
+
+function togglePhase(key) {
+  document.getElementById(`ph-${key}`)?.classList.toggle('open');
+}
+
+// ============================================================
+// PDF VIEWER
+// ============================================================
+function getAllDocs() { return Object.values(docsMap).flat(); }
+
+async function openPdf(docId, title) {
+  const doc = getAllDocs().find(d=>d.id===docId);
+  if (!doc) return;
+  document.getElementById('pdf-modal-title').textContent = title;
+  document.getElementById('pdf-frame').src = '';
+  document.getElementById('pdf-modal').classList.remove('hidden');
+  const { data } = await sb.storage.from('client-documents').createSignedUrl(doc.storage_path, 3600);
+  if (data?.signedUrl) {
+    document.getElementById('pdf-frame').src = data.signedUrl;
+    document.getElementById('pdf-download-btn').onclick = () => { const a=document.createElement('a'); a.href=data.signedUrl; a.download=doc.file_name||title; a.click(); };
+  }
+}
+function closePdfModal() { document.getElementById('pdf-modal').classList.add('hidden'); document.getElementById('pdf-frame').src=''; }
+document.getElementById('pdf-modal').addEventListener('click', e => { if(e.target===document.getElementById('pdf-modal')) closePdfModal(); });
+
+async function downloadDoc(docId, fileName) {
+  const doc = getAllDocs().find(d=>d.id===docId);
+  if (!doc) return;
+  const { data } = await sb.storage.from('client-documents').createSignedUrl(doc.storage_path, 300);
+  if (data?.signedUrl) { const a=document.createElement('a'); a.href=data.signedUrl; a.download=fileName; a.click(); }
+}
+
+async function downloadAll(phaseKey) {
+  toast('Préparation…','info');
+  for (const doc of (docsMap[phaseKey]||[])) {
+    const { data } = await sb.storage.from('client-documents').createSignedUrl(doc.storage_path, 300);
+    if (data?.signedUrl) { const a=document.createElement('a'); a.href=data.signedUrl; a.download=doc.file_name||doc.title; a.click(); await sleep(600); }
+  }
+  toast('Documents téléchargés !','success');
+}
+
+// ============================================================
+// ADMIN — LOAD
+// ============================================================
+async function loadAdminData() {
+  await Promise.all([loadAdminStats(), loadAdminClients(), loadAdminProjectSelects()]);
+}
+
+async function loadAdminStats() {
+  const [{ count:c },{ count:p },{ count:d },{ count:ph }] = await Promise.all([
+    sb.from('clients').select('*',{count:'exact',head:true}),
+    sb.from('projects').select('*',{count:'exact',head:true}),
+    sb.from('documents').select('*',{count:'exact',head:true}),
+    sb.from('phase_configs').select('*',{count:'exact',head:true}).eq('is_enabled',true),
+  ]);
+  document.getElementById('stat-clients').textContent = c||0;
+  document.getElementById('stat-projects').textContent = p||0;
+  document.getElementById('stat-docs').textContent = d||0;
+  document.getElementById('stat-phases').textContent = ph||0;
+}
+
+async function loadAdminClients() {
+  const { data:clients } = await sb.from('clients').select('*, projects(id,name,status)').order('created_at',{ascending:false});
+  const container = document.getElementById('admin-client-list');
+  if (!clients?.length) { container.innerHTML<`<div class="empty-state"><div class="es-icon">👥</div><h3>Aucun client</h3><p>Créez votre premier client ci-dessus.</p></div>`; return; }
+  container.innerHTML = clients.map(c => {
+    const proj = c.projects?.[0];
+    return `<div class="client-card">
+      <div class="client-avatar">${c.full_name.charAt(0).toUpperCase()}</div>
+      <div class="client-card-info">
+        <div class="client-card-name">${c.full_name}</div>
+        <div class="client-card-email">${c.email}${proj?` <span class="phase-tag">${proj.name}</span>`:''}</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        ${proj?`<button class="btn btn-ghost btn-sm" onclick="quickGoPhases('${proj.id}')">Gérer phases →</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function loadAdminProjectSelects() {
+  const { data:projects } = await sb.from('projects').select('*, clients(full_name)').order('created_at',{ascending:false});
+  adminProjects = projects || [];
+  const opts = '<option value="">— Sélectionner un projet —</option>' +
+    adminProjects.map(p=>`<option value="${p.id}">${p.name} (${p.clients?.full_name||'?'})</option>`).join('');
+  ['proj-select-project','phases-project-select','docs-proj-select'].forEach(id=>{
+    const s=document.getElementById(id); const cur=s.value; s.innerHTML=opts; if(cur) s.value=cur;
+  });
+}
+
+function quickGoPhases(projId) {
+  switchAdminTab('phases', document.querySelectorAll('.admin-tab')[2]);
+  document.getElementById('phases-project-select').value = projId;
+  onPhasesProjectChange();
+}
+
+// ============================================================
+// ADMIN — CREATE CLIENT
+// ============================================================
+async function createClient() {
+  const name     = v('nc-name'), email    = v('nc-email'),
+        phone    = v('nc-phone'), address  = v('nc-address'),
+        notes    = v('nc-notes'), projName = v('nc-proj-name'),
+        projAddr = v('nc-proj-addr'), password = v('nc-password');
+  if (!name||!email||!projName||!password) { toast('Nom, email, projet et mot de passe requis.','error'); return; }
+  if (password.length<8) { toast('Mot de passe : 8 caractères minimum.','error'); return; }
+  try {
+    const { data:authData, error:authErr } = await sbAdmin.auth.admin.createUser({ email, password, email_confirm:true });
+    if (authErr) throw new Error(authErr.message);
+    const { data:cRow, error:cErr } = await sbAdmin.from('clients').insert({ auth_user_id:authData.user.id, full_name:name, email, phone, address, notes }).select().single();
+    if (cErr) throw new Error(cErr.message);
+    const { data:pRow, error:pErr } = await sbAdmin.from('projects').insert({ client_id:cRow.id, name:projName, property_address:projAddr, status:'en_cours' }).select().single();
+    if (pErr) throw new Error(pErr.message);
+    const phInserts = PHASES.map((ph,i)=>({ project_id:pRow.id, phase_key:ph.key, is_enabled:true, is_locked:true, is_completed:false, sort_order:i }));
+    await sbAdmin.from('phase_configs').insert(phInserts);
+    toast(`Client "${name}" créé ! Identifiants : ${email} / ${password}`,'success');
+    clearClientForm();
+    await loadAdminData();
+  } catch(e) { toast('Erreur : '+e.message,'error'); }
+}
+function clearClientForm() { ['nc-name','nc-email','nc-phone','nc-address','nc-notes','nc-proj-name','nc-proj-addr','nc-password'].forEach(id=>document.getElementById(id).value=''); }
+function v(id) { return document.getElementById(id).value.trim(); }
+
+// ============================================================
+// ADMIN — PROJECT EDIT
+// ============================================================
+function onProjectTabChange() {
+  const projId = document.getElementById('proj-select-project').value;
+  const panel  = document.getElementById('project-edit-panel');
+  if (!projId) { panel.classList.add('hidden'); return; }
+  const proj = adminProjects.find(p=>p.id===projId);
+  if (!proj) return;
+  selectedProjId = projId;
+  document.getElementById('ep-name').value   = proj.name||'';
+  document.getElementById('ep-addr').value   = proj.property_address||'';
+  document.getElementById('ep-status').value = proj.status||'en_cours';
+  document.getElementById('ep-desc').value   = proj.description||'';
+  panel.classList.remove('hidden');
+}
+async function saveProject() {
+  if (!selectedProjId) return;
+  const { error } = await sbAdmin.from('projects').update({ name:v('ep-name'), property_address:v('ep-addr'), status:document.getElementById('ep-status').value, description:v('ep-desc'), updated_at:new Date().toISOString() }).eq('id',selectedProjId);
+  if (error) { toast('Erreur : '+error.message,'error'); return; }
+  toast('Projet mis à jour !','success');
+  await loadAdminProjectSelects();
+}
+
+// ============================================================
+// ADMIN — PHASES
+// ============================================================
+async function onPhasesProjectChange() {
+  const projId = document.getElementById('phases-project-select').value;
+  const panel  = document.getElementById('phases-config-panel');
+  if (!projId) { panel.classList.add('hidden'); return; }
+  const { data:cfgs } = await sbAdmin.from('phase_configs').select('*').eq('project_id',projId);
+  const cfgMap = {};
+  (cfgs||[]).forEach(c=>cfgMap[c.phase_key]=c);
+  const grid = document.getElementById('phase-config-grid');
+  grid.innerHTML = PHASES.map(ph=>{
+    const cfg = cfgMap[ph.key]||{is_enabled:true,is_locked:true,is_completed:false};
+    const isOpt = ph.key==='installation';
+    return `<div class="phase-config-item">
+      <div class="pc-label">${ph.icon} ${ph.label} ${isOpt?'<span class="badge badge-gray" style="font-size:10px">Option</span>':''}</div>
+      <div class="pc-controls">
+        <div class="toggle-group">
+          <label>Activé</label>
+          <label class="toggle-switch"><input type="checkbox" id="pc-en-${ph.key}" ${cfg.is_enabled?'checked':''}><span class="toggle-slider"></span></label>
+        </div>
+        <div class="toggle-group">
+          <label>Déverrouillé</label>
+          <label class="toggle-switch"><input type="checkbox" id="pc-un-${ph.key}" ${!cfg.is_locked?'checked':''}><span class="toggle-slider"></span></label>
+        </div>
+        <div class="toggle-group">
+          <label>Terminé</label>
+          <label class="toggle-switch"><input type="checkbox" id="pc-dn-${ph.key}" ${cfg.is_completed?'checked':''}><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  panel.classList.remove('hidden');
+}
+
+async function savePhaseConfigs() {
+  const projId = document.getElementById('phases-project-select').value;
+  if (!projId) return;
+  const upserts = PHASES.map((ph,i)=>({
+    project_id:projId, phase_key:ph.key,
+    is_enabled:  !!document.getElementById(`pc-en-${ph.key}`)?.checked,
+    is_locked:   !document.getElementById(`pc-un-${ph.key}`)?.checked,
+    is_completed:!!document.getElementById(`pc-dn-${ph.key}`)?.checked,
+    sort_order:i, updated_at:new Date().toISOString()
+  }));
+  const { error } = await sbAdmin.from('phase_configs').upsert(upserts,{onConflict:'project_id,phase_key'});
+  if (error) { toast('Erreur : '+error.message,'error'); return; }
+  toast('Phases enregistrées !','success');
+  await loadAdminStats();
+}
+
+// ============================================================
+// ADMIN — DOCUMENTS
+// ============================================================
+async function onDocsProjectChange() {
+  const projId = document.getElementById('docs-proj-select').value;
+  const panel  = document.getElementById('docs-upload-panel');
+  if (!projId) { panel.classList.add('hidden'); return; }
+  const phSel = document.getElementById('docs-phase-select');
+  phSel.innerHTML = '<option value="">— Phase —</option>' + PHASES.map(ph=>`<option value="${ph.key}">${ph.icon} ${ph.label}</option>`).join('');
+  panel.classList.remove('hidden');
+  document.getElementById('admin-docs-list').innerHTML = '<div class="docs-empty">Sélectionnez une phase.</div>';
+}
+
+async function loadAdminDocs() {
+  const projId   = document.getElementById('docs-proj-select').value;
+  const phaseKey = document.getElementById('docs-phase-select').value;
+  if (!projId||!phaseKey) return;
+  const { data:docs } = await sbAdmin.from('documents').select('*').eq('project_id',projId).eq('phase_key',phaseKey).order('sort_order');
+  const c = document.getElementById('admin-docs-list');
+  if (!docs?.length) { c.innerHTML='<div class="docs-empty">Aucun document pour cette phase.</div>'; return; }
+  c.innerHTML = '<div class="docs-grid">' + docs.map(d=>`
+    <div class="doc-item">
+      <div class="doc-icon">${DOC_ICONS[d.doc_type]||'📄'}</div>
+      <div class="doc-info">
+        <div class="doc-title">${d.title}</div>
+        <div class="doc-meta">${d.doc_type} · ${d.file_size?fmtBytes(d.file_size):'—'} · ${new Date(d.uploaded_at).toLocaleDateString('fr-FR')}</div>
+      </div>
+      <div class="doc-actions">
+        <button class="btn btn-danger btn-sm" onclick="deleteDocument('${d.id}','${esc(d.storage_path)}')">🗑</button>
+      </div>
+    </div>`).join('') + '</div>';
+}
+
+async function deleteDocument(docId, storagePath) {
+  if (!confirm('Supprimer ce document définitivement ?')) return;
+  await sbAdmin.storage.from('client-documents').remove([storagePath]);
+  await sbAdmin.from('documents').delete().eq('id',docId);
+  toast('Document supprimé.','success');
+  await loadAdminDocs();
+  await loadAdminStats();
+}
+
+function onFileSelected(e) {
+  selectedFile = e.target.files[0];
+  if (selectedFile) document.getElementById('selected-file-name').textContent = `📎 ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
+}
+function onFileDrop(e) {
+  e.preventDefault(); document.getElementById('upload-area').classList.remove('drag-over');
+  selectedFile = e.dataTransfer.files[0];
+  if (selectedFile) document.getElementById('selected-file-name').textContent = `📎 ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
+}
+
+async function uploadDocument() {
+  const projId   = document.getElementById('docs-proj-select').value;
+  const phaseKey = document.getElementById('docs-phase-select').value;
+  const title    = v('doc-title');
+  const docType  = document.getElementById('doc-type').value;
+  const desc     = v('doc-desc');
+  if (!projId||!phaseKey) { toast('Sélectionnez un projet et une phase.','error'); return; }
+  if (!title) { toast('Le titre est requis.','error'); return; }
+  if (!selectedFile) { toast('Sélectionnez un fichier.','error'); return; }
+  const btn = document.getElementById('upload-btn');
+  btn.disabled=true; btn.textContent='Upload…';
+  const prog = document.getElementById('upload-progress');
+  const bar  = document.getElementById('upload-progress-bar');
+  prog.style.display='block'; bar.style.width='0%';
+  const storagePath = `${projId}/${phaseKey}/${Date.now()}-${selectedFile.name}`;
+  try {
+    let p=0; const iv=setInterval(()=>{ p=Math.min(p+12,85); bar.style.width=p+'%'; },200);
+    const { error:upErr } = await sbAdmin.storage.from('client-documents').upload(storagePath, selectedFile, { cacheControl:'3600', upsert:false, contentType:selectedFile.type });
+    clearInterval(iv);
+    if (upErr) throw new Error(upErr.message);
+    bar.style.width='100%';
+    const { error:dbErr } = await sbAdmin.from('documents').insert({ project_id:projId, phase_key:phaseKey, doc_type:docType, title, description:desc, storage_path:storagePath, file_name:selectedFile.name, file_size:selectedFile.size, mime_type:selectedFile.type, uploaded_by:currentUser?.email });
+    if (dbErr) throw new Error(dbErr.message);
+    toast('Document uploadé !','success');
+    ['doc-title','doc-desc'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('doc-file-input').value='';
+    document.getElementById('selected-file-name').textContent='';
+    selectedFile=null; prog.style.display='none'; bar.style.width='0%';
+    await loadAdminDocs(); await loadAdminStats();
+  } catch(e) { toast('Erreur : '+e.message,'error'); prog.style.display='none'; }
+  btn.disabled=false; btn.textContent='⬆ Uploader';
+}
+
+// ============================================================
+// ADMIN — TABS
+// ============================================================
+function switchAdminTab(tab, el) {
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  if(el) el.classList.add('active');
+  ['clients','project','phases','documents'].forEach(t=>{ document.getElementById(`admin-tab-${t}`).classList.toggle('hidden',t!==tab); });
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+function showPage(name) {
+  ['loading-screen','page-login','page-portal','page-admin'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.classList.add('hidden');
+  });
+  const map = { login:'page-login', portal:'page-portal', admin:'page-admin', loading:'loading-screen' };
+  const el = document.getElementById(map[name]||name);
+  if(el) el.classList.remove('hidden');
+}
+function toast(msg, type='info') {
+  const c=document.getElementById('toast-container');
+  const el=document.createElement('div');
+  el.className=`toast toast-${type}`;
+  el.innerHTML<`<span>${{success:'✓',error:'✕',info:'ℹ'}[type]||'•'}</span><span>${msg}</span>`;
+  c.appendChild(el);
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity 0.3s'; setTimeout(()=>el.remove(),300); },5000);
+}
+function fmtBytes(b) { if(!b) return ''; if(b<1024) return b+' B'; if(b<1048576) return (b/1024).toFixed(1)+' KB'; return (b/1048576).toFixed(1)+' MB'; }
+function esc(s) { return (s||'').replace(/'/g,"\\'"); }
+function sleep(ms) { return new Promise(r=>setTimeout(r,ms)); }
+
+// BOOT
+init();
+</script>
+</body>
+</html>
