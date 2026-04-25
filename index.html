@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nomos Universe — Espace Client</title>
+  <title>Nomos Universe â Espace Client</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #080808; --bg2: #111111; --bg3: #1a1a1a; --border: #222222;
-      --gold: #C9A88A; --gold2: #D4B99A; --white: #FFFFFF; --gray: #888888;
-      --gray2: #555555; --green: #4CAF50; --red: #E53935; --blue: #2196F3;
+      --bg: #FAF9F5; --bg2: #F3EDE6; --bg3: #EDE5DB; --border: #DDD5C8;
+      --gold: #C9A88A; --gold2: #B8906E; --white: #2c2c2c; --gray: #8B7D6E;
+      --gray2: #6B5B4E; --green: #4CAF50; --red: #E53935; --blue: #2196F3;
       --radius: 12px; --radius-sm: 8px; --transition: 0.25s ease;
     }
     html, body { height: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--white); }
@@ -77,7 +77,7 @@
     .phase-item.completed { border-color: rgba(76,175,80,0.3); }
     .phase-item.locked { opacity: 0.6; }
     .phase-header { display: flex; align-items: center; gap: 16px; padding: 18px 20px; cursor: pointer; user-select: none; }
-    .phase-header:hover { background: rgba(255,255,255,0.02); }
+    .phase-header:hover { background: rgba(0,0,0,0.03); }
     .phase-num { width: 32px; height: 32px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--gray); flex-shrink: 0; }
     .phase-item.completed .phase-num { background: rgba(76,175,80,0.2); border-color: var(--green); color: var(--green); }
     .phase-info { flex: 1; }
@@ -109,14 +109,14 @@
     #pdf-modal { position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); padding: 20px; }
     .pdf-modal-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); width: 100%; max-width: 900px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
     .pdf-modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-    .pdf-modal-body { flex: 1; overflow: auto; background: #1a1a1a; }
+    .pdf-modal-body { flex: 1; overflow: auto; background: var(--bg3); }
     .pdf-modal-body iframe { width: 100%; height: 70vh; border: none; display: block; }
     .close-btn { background: none; border: none; color: var(--gray); font-size: 20px; cursor: pointer; padding: 4px; }
     .close-btn:hover { color: var(--white); }
     /* ADMIN */
     #page-admin { min-height: 100vh; display: flex; flex-direction: column; }
     .admin-header { background: linear-gradient(to right, var(--bg2), rgba(201,169,110,0.05)); border-bottom: 1px solid var(--border); padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-    .admin-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; background: rgba(201,169,110,0.2); color: var(--gold); border: 1px solid rgba(201,169,110,0.3); }
+    .admin-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; background: rgba(201,169,110,0.2); color: var(--gold); border: 1px solid rgba(201,168,138,0.3); }
     .admin-body { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 32px; }
     .admin-tabs { display: flex; gap: 2px; margin-bottom: 28px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; width: fit-content; }
     .admin-tab { padding: 8px 20px; border-radius: 6px; font-size: 13px; cursor: pointer; transition: var(--transition); background: transparent; color: var(--gray); }
@@ -145,7 +145,7 @@
     .toggle-switch input { opacity: 0; width: 0; height: 0; }
     .toggle-slider { position: absolute; cursor: pointer; inset: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 22px; transition: var(--transition); }
     .toggle-slider::before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background: var(--gray2); border-radius: 50%; transition: var(--transition); }
-    .toggle-switch input:checked + .toggle-slider { background: rgba(201,169,110,0.3); border-color: var(--gold); }
+    .toggle-switch input:checked + .toggle-slider { background: rgba(201,168,138,0.3); border-color: var(--gold); }
     .toggle-switch input:checked + .toggle-slider::before { transform: translateX(18px); background: var(--gold); }
     .upload-area { border: 2px dashed var(--border); border-radius: var(--radius-sm); padding: 32px; text-align: center; cursor: pointer; transition: var(--transition); }
     .upload-area:hover, .upload-area.drag-over { border-color: var(--gold); background: rgba(201,169,110,0.04); }
@@ -159,7 +159,7 @@
     .divider { height: 1px; background: var(--border); margin: 24px 0; }
     .divider-text { display: flex; align-items: center; gap: 12px; color: var(--gray2); font-size: 12px; margin: 20px 0; }
     .divider-text::before, .divider-text::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .phase-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; background: rgba(201,169,110,0.15); color: var(--gold); margin-left: 6px; }
+    .phase-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; background: rgba(201,168,138,0.15); color: var(--gold); margin-left: 6px; }
     .upload-progress { margin-top: 12px; background: var(--bg3); border-radius: 4px; overflow: hidden; height: 4px; }
     .upload-progress-bar { height: 100%; background: var(--gold); transition: width 0.3s; width: 0%; }
     @media (max-width: 768px) {
@@ -188,7 +188,7 @@
 
 <!-- ===== LOGIN ===== -->
 <div id="page-login" class="hidden">
-  <div id="page-login" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at 50% 0%,rgba(201,169,110,0.08) 0%,transparent 70%),#080808">
+  <div id="page-login" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,138,0.15) 0%,transparent 70%),var(--bg)">
     <div class="login-box">
       <div class="login-header">
         <p class="logo" style="font-size:15px;letter-spacing:6px">NOMOS UNIVERSE</p>
@@ -196,7 +196,7 @@
         <p class="logo-sub" style="font-size:11px;letter-spacing:3px">ESPACE CLIENT</p>
         <div style="margin-top:32px">
           <h1 style="font-size:24px;font-weight:300;color:var(--white)">Connexion</h1>
-          <p style="margin-top:8px;font-size:13px">Accédez à votre espace projet personnalisé</p>
+          <p style="margin-top:8px;font-size:13px">AccÃ©dez Ã  votre espace projet personnalisÃ©</p>
         </div>
       </div>
       <div class="login-form">
@@ -206,7 +206,7 @@
         </div>
         <div class="field">
           <label>Mot de passe</label>
-          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" />
+          <input type="password" id="login-password" placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" autocomplete="current-password" />
         </div>
         <button class="btn btn-gold" id="login-btn" onclick="doLogin()">
           <span id="login-btn-text">Se connecter</span>
@@ -214,7 +214,7 @@
         <div id="login-error" class="hidden" style="background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.3);border-radius:8px;padding:12px 16px;font-size:13px;color:#E53935;text-align:center"></div>
       </div>
       <div style="text-align:center;margin-top:24px;font-size:12px;color:var(--gray2)">
-        Mot de passe oublié ? Contactez <a href="mailto:contact@nomosuniverse.com">contact@nomosuniverse.com</a>
+        Mot de passe oubliÃ© ? Contactez <a href="mailto:contact@nomosuniverse.com">contact@nomosuniverse.com</a>
       </div>
     </div>
   </div>
@@ -227,13 +227,13 @@
       <div><p class="logo" style="font-size:12px;letter-spacing:4px">NOMOS UNIVERSE</p><p class="logo-sub">ESPACE CLIENT</p></div>
     </div>
     <div style="display:flex;align-items:center;gap:12px">
-      <span style="font-size:13px;color:var(--gray)">Bonjour, <strong id="portal-client-name" style="color:var(--white)">—</strong></span>
-      <button class="btn btn-ghost btn-sm" onclick="doLogout()">Déconnexion</button>
+      <span style="font-size:13px;color:var(--gray)">Bonjour, <strong id="portal-client-name" style="color:var(--white)">â</strong></span>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()">DÃ©connexion</button>
     </div>
   </header>
   <div class="portal-body">
     <div class="project-hero">
-      <h1 id="portal-project-name">Chargement…</h1>
+      <h1 id="portal-project-name">Chargementâ¦</h1>
       <div style="display:flex;align-items:center;gap:12px;margin-top:6px">
         <span id="portal-project-address" style="font-size:13px;color:var(--gray)"></span>
         <span id="portal-project-status" class="badge badge-gold"></span>
@@ -251,8 +251,8 @@
     <div class="pdf-modal-header">
       <span style="font-size:14px;font-weight:500" id="pdf-modal-title">Document</span>
       <div style="display:flex;gap:8px;align-items:center">
-        <button class="btn btn-outline btn-sm" id="pdf-download-btn">⬇ Télécharger</button>
-        <button class="close-btn" onclick="closePdfModal()">✕</button>
+        <button class="btn btn-outline btn-sm" id="pdf-download-btn">â¬ TÃ©lÃ©charger</button>
+        <button class="close-btn" onclick="closePdfModal()">â</button>
       </div>
     </div>
     <div class="pdf-modal-body">
@@ -270,62 +270,62 @@
     </div>
     <div style="display:flex;align-items:center;gap:12px">
       <span style="font-size:13px;color:var(--gray)" id="admin-user-email"></span>
-      <button class="btn btn-ghost btn-sm" onclick="doLogout()">Déconnexion</button>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()">DÃ©connexion</button>
     </div>
   </header>
   <div class="admin-body">
     <!-- Stats -->
     <div class="stats-row">
-      <div class="stat-card"><div class="stat-value" id="stat-clients">—</div><div class="stat-label">Clients</div></div>
-      <div class="stat-card"><div class="stat-value" id="stat-projects">—</div><div class="stat-label">Projets</div></div>
-      <div class="stat-card"><div class="stat-value" id="stat-docs">—</div><div class="stat-label">Documents</div></div>
-      <div class="stat-card"><div class="stat-value" id="stat-phases">—</div><div class="stat-label">Phases actives</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-clients">â</div><div class="stat-label">Clients</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-projects">â</div><div class="stat-label">Projets</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-docs">â</div><div class="stat-label">Documents</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-phases">â</div><div class="stat-label">Phases actives</div></div>
     </div>
     <!-- Tabs -->
     <div class="admin-tabs">
-      <button class="admin-tab active" onclick="switchAdminTab('clients',this)">👥 Clients</button>
-      <button class="admin-tab" onclick="switchAdminTab('project',this)">📁 Projet</button>
-      <button class="admin-tab" onclick="switchAdminTab('phases',this)">🗂 Phases</button>
-      <button class="admin-tab" onclick="switchAdminTab('documents',this)">📄 Documents</button>
+      <button class="admin-tab active" onclick="switchAdminTab('clients',this)">ð¥ Clients</button>
+      <button class="admin-tab" onclick="switchAdminTab('project',this)">ð Projet</button>
+      <button class="admin-tab" onclick="switchAdminTab('phases',this)">ð Phases</button>
+      <button class="admin-tab" onclick="switchAdminTab('documents',this)">ð Documents</button>
     </div>
 
     <!-- TAB: CLIENTS -->
     <div id="admin-tab-clients">
       <div class="panel">
-        <div class="panel-title">➕ Nouveau client</div>
+        <div class="panel-title">â Nouveau client</div>
         <div class="panel-grid">
           <div class="field"><label>Nom complet *</label><input type="text" id="nc-name" placeholder="Marie Dupont" /></div>
           <div class="field"><label>Email (identifiant) *</label><input type="email" id="nc-email" placeholder="marie@exemple.com" /></div>
-          <div class="field"><label>Téléphone</label><input type="text" id="nc-phone" placeholder="+33 6 12 34 56 78" /></div>
+          <div class="field"><label>TÃ©lÃ©phone</label><input type="text" id="nc-phone" placeholder="+33 6 12 34 56 78" /></div>
           <div class="field"><label>Ville / Adresse client</label><input type="text" id="nc-address" placeholder="Paris, France" /></div>
         </div>
-        <div class="field" style="margin-top:12px"><label>Notes internes</label><textarea id="nc-notes" placeholder="Notes sur ce client…"></textarea></div>
-        <div class="divider-text">Projet associé</div>
+        <div class="field" style="margin-top:12px"><label>Notes internes</label><textarea id="nc-notes" placeholder="Notes sur ce clientâ¦"></textarea></div>
+        <div class="divider-text">Projet associÃ©</div>
         <div class="panel-grid">
-          <div class="field"><label>Nom du projet *</label><input type="text" id="nc-proj-name" placeholder="Rénovation Appartement Paris 11" /></div>
+          <div class="field"><label>Nom du projet *</label><input type="text" id="nc-proj-name" placeholder="RÃ©novation Appartement Paris 11" /></div>
           <div class="field"><label>Adresse du bien</label><input type="text" id="nc-proj-addr" placeholder="15 rue Exemple, 75011 Paris" /></div>
         </div>
-        <div class="field" style="margin-top:12px"><label>Mot de passe temporaire *</label><input type="text" id="nc-password" placeholder="Minimum 8 caractères" /></div>
+        <div class="field" style="margin-top:12px"><label>Mot de passe temporaire *</label><input type="text" id="nc-password" placeholder="Minimum 8 caractÃ¨res" /></div>
         <div class="panel-actions">
           <button class="btn btn-ghost" onclick="clearClientForm()">Effacer</button>
-          <button class="btn btn-gold" onclick="createClient()">✓ Créer le client</button>
+          <button class="btn btn-gold" onclick="createClient()">â CrÃ©er le client</button>
         </div>
       </div>
       <p class="section-title">Clients existants</p>
       <div class="client-list" id="admin-client-list">
-        <div class="empty-state"><div class="es-icon">👥</div><h3>Aucun client</h3><p>Créez votre premier client ci-dessus.</p></div>
+        <div class="empty-state"><div class="es-icon">ð¥</div><h3>Aucun client</h3><p>CrÃ©ez votre premier client ci-dessus.</p></div>
       </div>
     </div>
 
     <!-- TAB: PROJECT -->
     <div id="admin-tab-project" class="hidden">
       <div class="project-select-row">
-        <select id="proj-select-project" onchange="onProjectTabChange()"><option value="">— Sélectionner un projet —</option></select>
-        <button class="btn btn-ghost btn-sm" onclick="loadAdminProjectSelects()">↻</button>
+        <select id="proj-select-project" onchange="onProjectTabChange()"><option value="">â SÃ©lectionner un projet â</option></select>
+        <button class="btn btn-ghost btn-sm" onclick="loadAdminProjectSelects()">â»</button>
       </div>
       <div id="project-edit-panel" class="hidden">
         <div class="panel">
-          <div class="panel-title">✏️ Modifier le projet</div>
+          <div class="panel-title">âï¸ Modifier le projet</div>
           <div class="panel-grid">
             <div class="field"><label>Nom du projet</label><input type="text" id="ep-name" /></div>
             <div class="field"><label>Adresse du bien</label><input type="text" id="ep-addr" /></div>
@@ -335,7 +335,7 @@
             <select id="ep-status">
               <option value="en_cours">En cours</option>
               <option value="pause">En pause</option>
-              <option value="termine">Terminé</option>
+              <option value="termine">TerminÃ©</option>
               <option value="suspendu">Suspendu</option>
             </select>
           </div>
@@ -348,14 +348,14 @@
     <!-- TAB: PHASES -->
     <div id="admin-tab-phases" class="hidden">
       <div class="project-select-row">
-        <select id="phases-project-select" onchange="onPhasesProjectChange()"><option value="">— Sélectionner un projet —</option></select>
+        <select id="phases-project-select" onchange="onPhasesProjectChange()"><option value="">â SÃ©lectionner un projet â</option></select>
       </div>
       <div id="phases-config-panel" class="hidden">
         <div class="panel">
-          <div class="panel-title">🗂 Configuration des phases</div>
-          <p style="font-size:13px;color:var(--gray);margin-bottom:16px">Activez, verrouillez ou marquez les phases comme terminées. Les phases désactivées sont masquées pour le client.</p>
+          <div class="panel-title">ð Configuration des phases</div>
+          <p style="font-size:13px;color:var(--gray);margin-bottom:16px">Activez, verrouillez ou marquez les phases comme terminÃ©es. Les phases dÃ©sactivÃ©es sont masquÃ©es pour le client.</p>
           <div id="phase-config-grid"></div>
-          <div class="panel-actions"><button class="btn btn-gold" onclick="savePhaseConfigs()">✓ Enregistrer les phases</button></div>
+          <div class="panel-actions"><button class="btn btn-gold" onclick="savePhaseConfigs()">â Enregistrer les phases</button></div>
         </div>
       </div>
     </div>
@@ -363,14 +363,14 @@
     <!-- TAB: DOCUMENTS -->
     <div id="admin-tab-documents" class="hidden">
       <div class="project-select-row">
-        <select id="docs-proj-select" onchange="onDocsProjectChange()"><option value="">— Sélectionner un projet —</option></select>
-        <select id="docs-phase-select" onchange="loadAdminDocs()" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--white);padding:8px 14px;font-size:13px;outline:none;flex:1"><option value="">— Phase —</option></select>
+        <select id="docs-proj-select" onchange="onDocsProjectChange()"><option value="">â SÃ©lectionner un projet â</option></select>
+        <select id="docs-phase-select" onchange="loadAdminDocs()" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--white);padding:8px 14px;font-size:13px;outline:none;flex:1"><option value="">â Phase â</option></select>
       </div>
       <div id="docs-upload-panel" class="hidden">
         <div class="panel">
-          <div class="panel-title">⬆️ Ajouter un document</div>
+          <div class="panel-title">â¬ï¸ Ajouter un document</div>
           <div class="panel-grid">
-            <div class="field"><label>Titre *</label><input type="text" id="doc-title" placeholder="Planche tendance – Salon" /></div>
+            <div class="field"><label>Titre *</label><input type="text" id="doc-title" placeholder="Planche tendance â Salon" /></div>
             <div class="field"><label>Type</label>
               <select id="doc-type">
                 <option value="pdf">Document PDF</option>
@@ -383,20 +383,20 @@
               </select>
             </div>
           </div>
-          <div class="field" style="margin-top:10px"><label>Description (optionnel)</label><input type="text" id="doc-desc" placeholder="Description courte…" /></div>
+          <div class="field" style="margin-top:10px"><label>Description (optionnel)</label><input type="text" id="doc-desc" placeholder="Description courteâ¦" /></div>
           <div class="upload-area" id="upload-area" onclick="document.getElementById('doc-file-input').click()" ondragover="e=>{e.preventDefault();document.getElementById('upload-area').classList.add('drag-over')}" ondragleave="document.getElementById('upload-area').classList.remove('drag-over')" ondrop="onFileDrop(event)">
             <input type="file" id="doc-file-input" accept=".pdf,.png,.jpg,.jpeg,.zip" onchange="onFileSelected(event)" />
-            <div style="font-size:32px;margin-bottom:10px">📎</div>
+            <div style="font-size:32px;margin-bottom:10px">ð</div>
             <div style="font-size:14px;color:var(--gray)">Cliquez ou glissez un fichier ici</div>
-            <div style="font-size:12px;color:var(--gray2);margin-top:6px">PDF, PNG, JPG, ZIP — Max 50MB</div>
+            <div style="font-size:12px;color:var(--gray2);margin-top:6px">PDF, PNG, JPG, ZIP â Max 50MB</div>
             <div id="selected-file-name" style="margin-top:10px;font-size:13px;color:var(--gold);font-weight:500"></div>
             <div class="upload-progress" id="upload-progress" style="display:none;margin-top:10px"><div class="upload-progress-bar" id="upload-progress-bar"></div></div>
           </div>
-          <div class="panel-actions"><button class="btn btn-gold" id="upload-btn" onclick="uploadDocument()">⬆ Uploader</button></div>
+          <div class="panel-actions"><button class="btn btn-gold" id="upload-btn" onclick="uploadDocument()">â¬ Uploader</button></div>
         </div>
         <div class="panel">
-          <div class="panel-title">📄 Documents de la phase</div>
-          <div id="admin-docs-list"><div class="docs-empty">Sélectionnez un projet et une phase.</div></div>
+          <div class="panel-title">ð Documents de la phase</div>
+          <div id="admin-docs-list"><div class="docs-empty">SÃ©lectionnez un projet et une phase.</div></div>
         </div>
       </div>
     </div>
@@ -408,23 +408,23 @@
 // CONFIG
 // ============================================================
 const SUPABASE_URL  = 'https://tccxnavtwzkpmpbvevcc.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjY3huYXZ0d3prcG1wYnZldmNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNDUwNTUsImV4cCI6MjA5MjYyMTA1NX0.zYkfUZqTb58vGw8DwIPCTSOMisl-x2GLfBuiSJvBFiQ';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjY3huYXZ0d3prcG1wYnZldmNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNDUwNTUsImV4cCI6MjA5MjYyMTA1NX0.zYkfUZqTb58vGw4DwIPCTSOMisl-x2GLfBuiSJvBFiQ';
 const SUPABASE_SVC  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjY3huYXZ0d3prcG1wYnZldmNjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NzA0NTA1NSwiZXhwIjoyMDkyNjIxMDU1fQ.MUi3ZM5jxxoEvCNEx25sWAyGT_G-tK38hSzmJhmLiUw';
 
 const PHASES = [
-  { key:'call_cadrage',          label:'Call Cadrage',               icon:'📞', desc:'Premier échange pour cerner votre projet et vos attentes' },
-  { key:'visite_bien',           label:'Visite du Bien',             icon:'🏠', desc:'Visite sur place et prise de mesures de votre espace' },
-  { key:'clarte_deco',           label:'Clarté Déco',                icon:'✨', desc:'Séance visio pour définir votre style et votre identité déco' },
-  { key:'paiement_confirmation', label:'Paiement & Confirmation',    icon:'✅', desc:"Validation du devis et versement de l'acompte" },
-  { key:'validation_devis',      label:'Validation Devis Travaux',   icon:'📋', desc:'Présentation et validation du devis pour les travaux' },
-  { key:'conception_3d',         label:'Projection 3D & Conception', icon:'🎨', desc:'Planches ambiance, projections 3D, plan 2D et shopping liste' },
-  { key:'travaux',               label:'Travaux',                    icon:'🔨', desc:'Réalisation des travaux selon le planning établi' },
-  { key:'livraison',             label:'Livraison du Chantier',      icon:'🎁', desc:'Livraison et réception officielle de votre espace rénové' },
-  { key:'installation',          label:'Installation',               icon:'🪴', desc:'Installation du mobilier et accessoires (option)' },
+  { key:'call_cadrage',          label:'Call Cadrage',               icon:'ð', desc:'Premier Ã©change pour cerner votre projet et vos attentes' },
+  { key:'visite_bien',           label:'Visite du Bien',             icon:'ð ', desc:'Visite sur place et prise de mesures de votre espace' },
+  { key:'clarte_deco',           label:'ClartÃ© DÃ©co',                icon:'â¨', desc:'SÃ©ance visio pour dÃ©finir votre style et votre identitÃ© dÃ©co' },
+  { key:'paiement_confirmation', label:'Paiement & Confirmation',    icon:'â', desc:"Validation du devis et versement de l'acompte" },
+  { key:'validation_devis',      label:'Validation Devis Travaux',   icon:'ð', desc:'PrÃ©sentation et validation du devis pour les travaux' },
+  { key:'conception_3d',         label:'Projection 3D & Conception', icon:'ð¨', desc:'Planches ambiance, projections 3D, plan 2D et shopping liste' },
+  { key:'travaux',               label:'Travaux',                    icon:'ð¨', desc:'RÃ©alisation des travaux selon le planning Ã©tabli' },
+  { key:'livraison',             label:'Livraison du Chantier',      icon:'ð', desc:'Livraison et rÃ©ception officielle de votre espace rÃ©novÃ©' },
+  { key:'installation',          label:'Installation',               icon:'ðª´', desc:'Installation du mobilier et accessoires (option)' },
 ];
 const SPECIAL = { conception_3d:['plan_2d','shopping_liste'], travaux:['planning_travaux'] };
-const STATUS_LABELS = { en_cours:'En cours', termine:'Terminé', suspendu:'Suspendu', pause:'En pause' };
-const DOC_ICONS = { pdf:'📄', plan_2d:'📐', shopping_liste:'🛒', planning_travaux:'📅', devis:'📋', facture:'🧾', autre:'📎' };
+const STATUS_LABELS = { en_cours:'En cours', termine:'TerminÃ©', suspendu:'Suspendu', pause:'En pause' };
+const DOC_ICONS = { pdf:'ð', plan_2d:'ð', shopping_liste:'ð', planning_travaux:'ð', devis:'ð', facture:'ð§¾', autre:'ð' };
 
 // ============================================================
 // STATE
@@ -469,7 +469,7 @@ async function doLogin() {
   const btn   = document.getElementById('login-btn');
   const errEl = document.getElementById('login-error');
   if (!email || !pass) { showLoginErr('Veuillez remplir tous les champs.'); return; }
-  btn.disabled = true; document.getElementById('login-btn-text').textContent = 'Connexion…'; errEl.classList.add('hidden');
+  btn.disabled = true; document.getElementById('login-btn-text').textContent = 'Connexionâ¦'; errEl.classList.add('hidden');
   const { data, error } = await sb.auth.signInWithPassword({ email, password:pass });
   if (error) { btn.disabled=false; document.getElementById('login-btn-text').textContent='Se connecter'; showLoginErr('Email ou mot de passe incorrect.'); return; }
   currentUser = data.user;
@@ -545,7 +545,7 @@ function renderPhases() {
 
     let bodyHTML = '';
     if (locked) {
-      bodyHTML = `<div class="lock-overlay"><span style="font-size:20px">🔒</span><span>Cette phase n'est pas encore accessible. Contactez votre designer pour plus d'informations.</span></div>`;
+      bodyHTML = `<div class="lock-overlay"><span style="font-size:20px">ð</span><span>Cette phase n'est pas encore accessible. Contactez votre designer pour plus d'informations.</span></div>`;
     } else {
       // Special items
       if (specTypes.length) {
@@ -553,20 +553,20 @@ function renderPhases() {
         if (specTypes.includes('plan_2d')) {
           const d = pDocs.find(x=>x.doc_type==='plan_2d');
           bodyHTML += d
-            ? `<div class="special-item"><span style="font-size:18px">📐</span><span style="flex:1"><strong>Plan 2D</strong> — ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
-            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">📐</span><span>Plan 2D — En cours de préparation</span></div>`;
+            ? `<div class="special-item"><span style="font-size:18px">ð</span><span style="flex:1"><strong>Plan 2D</strong> â ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
+            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">ð</span><span>Plan 2D â En cours de prÃ©paration</span></div>`;
         }
         if (specTypes.includes('shopping_liste')) {
           const d = pDocs.find(x=>x.doc_type==='shopping_liste');
           bodyHTML += d
-            ? `<div class="special-item"><span style="font-size:18px">🛒</span><span style="flex:1"><strong>Shopping Liste</strong> — ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
-            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">🛒</span><span>Shopping Liste — En cours de préparation</span></div>`;
+            ? `<div class="special-item"><span style="font-size:18px">ð</span><span style="flex:1"><strong>Shopping Liste</strong> â ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
+            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">ð</span><span>Shopping Liste â En cours de prÃ©paration</span></div>`;
         }
         if (specTypes.includes('planning_travaux')) {
           const d = pDocs.find(x=>x.doc_type==='planning_travaux');
           bodyHTML += d
-            ? `<div class="special-item"><span style="font-size:18px">📅</span><span style="flex:1"><strong>Planning Travaux</strong> — ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
-            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">📅</span><span>Planning Travaux — En cours de préparation</span></div>`;
+            ? `<div class="special-item"><span style="font-size:18px">ð</span><span style="flex:1"><strong>Planning Travaux</strong> â ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
+            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">ð</span><span>Planning Travaux â En cours de prÃ©paration</span></div>`;
         }
         bodyHTML += '</div>';
       }
@@ -575,20 +575,20 @@ function renderPhases() {
       if (mainDocs.length) {
         bodyHTML += '<div class="docs-grid">';
         mainDocs.forEach(d => {
-          const icon = DOC_ICONS[d.doc_type]||'📄';
+          const icon = DOC_ICONS[d.doc_type]||'ð';
           const size = d.file_size ? fmtBytes(d.file_size) : '';
           bodyHTML += `<div class="doc-item">
             <div class="doc-icon">${icon}</div>
-            <div class="doc-info"><div class="doc-title">${d.title}</div><div class="doc-meta">${d.description||''} ${size?'· '+size:''}</div></div>
+            <div class="doc-info"><div class="doc-title">${d.title}</div><div class="doc-meta">${d.description||''} ${size?'Â· '+size:''}</div></div>
             <div class="doc-actions">
-              <button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">👁 Voir</button>
-              <button class="btn btn-ghost btn-sm" onclick="downloadDoc('${d.id}','${esc(d.file_name||d.title)}')">⬇</button>
+              <button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">ð Voir</button>
+              <button class="btn btn-ghost btn-sm" onclick="downloadDoc('${d.id}','${esc(d.file_name||d.title)}')">â¬</button>
             </div>
           </div>`;
         });
         bodyHTML += '</div>';
         if (mainDocs.length > 1) {
-          bodyHTML += `<div style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="downloadAll('${ph.key}')">⬇ Tout télécharger</button></div>`;
+          bodyHTML += `<div style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="downloadAll('${ph.key}')">â¬ Tout tÃ©lÃ©charger</button></div>`;
         }
       } else if (!specTypes.length) {
         bodyHTML += `<div class="docs-empty">Aucun document disponible pour cette phase.</div>`;
@@ -600,15 +600,15 @@ function renderPhases() {
     item.id = `ph-${ph.key}`;
     item.innerHTML = `
       <div class="phase-header" onclick="${locked?'':` togglePhase('${ph.key}')`}">
-        <div class="phase-num">${completed?'✓':num}</div>
+        <div class="phase-num">${completed?'â':num}</div>
         <div class="phase-info">
           <div class="phase-label">${ph.icon} ${ph.label}</div>
           <div class="phase-desc">${ph.desc}</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px">
-          ${locked ? '<span>🔒</span>' : ''}
-          ${completed ? '<span class="badge badge-green">✓ Terminé</span>' : ''}
-          ${!locked ? '<span class="phase-chevron">⌄</span>' : ''}
+          ${locked ? '<span>ð</span>' : ''}
+          ${completed ? '<span class="badge badge-green">â TerminÃ©</span>' : ''}
+          ${!locked ? '<span class="phase-chevron">â</span>' : ''}
         </div>
       </div>
       <div class="phase-content">${bodyHTML}</div>`;
@@ -648,16 +648,16 @@ async function downloadDoc(docId, fileName) {
 }
 
 async function downloadAll(phaseKey) {
-  toast('Préparation…','info');
+  toast('PrÃ©parationâ¦','info');
   for (const doc of (docsMap[phaseKey]||[])) {
     const { data } = await sb.storage.from('client-documents').createSignedUrl(doc.storage_path, 300);
     if (data?.signedUrl) { const a=document.createElement('a'); a.href=data.signedUrl; a.download=doc.file_name||doc.title; a.click(); await sleep(600); }
   }
-  toast('Documents téléchargés !','success');
+  toast('Documents tÃ©lÃ©chargÃ©s !','success');
 }
 
 // ============================================================
-// ADMIN — LOAD
+// ADMIN â LOAD
 // ============================================================
 async function loadAdminData() {
   await Promise.all([loadAdminStats(), loadAdminClients(), loadAdminProjectSelects()]);
@@ -679,7 +679,7 @@ async function loadAdminStats() {
 async function loadAdminClients() {
   const { data:clients } = await sb.from('clients').select('*, projects(id,name,status)').order('created_at',{ascending:false});
   const container = document.getElementById('admin-client-list');
-  if (!clients?.length) { container.innerHTML<`<div class="empty-state"><div class="es-icon">👥</div><h3>Aucun client</h3><p>Créez votre premier client ci-dessus.</p></div>`; return; }
+  if (!clients?.length) { container.innerHTML=`<div class="empty-state"><div class="es-icon">ð¥</div><h3>Aucun client</h3><p>CrÃ©ez votre premier client ci-dessus.</p></div>`; return; }
   container.innerHTML = clients.map(c => {
     const proj = c.projects?.[0];
     return `<div class="client-card">
@@ -689,7 +689,7 @@ async function loadAdminClients() {
         <div class="client-card-email">${c.email}${proj?` <span class="phase-tag">${proj.name}</span>`:''}</div>
       </div>
       <div style="display:flex;gap:8px">
-        ${proj?`<button class="btn btn-ghost btn-sm" onclick="quickGoPhases('${proj.id}')">Gérer phases →</button>`:''}
+        ${proj?`<button class="btn btn-ghost btn-sm" onclick="quickGoPhases('${proj.id}')">GÃ©rer phases â</button>`:''}
       </div>
     </div>`;
   }).join('');
@@ -698,7 +698,7 @@ async function loadAdminClients() {
 async function loadAdminProjectSelects() {
   const { data:projects } = await sb.from('projects').select('*, clients(full_name)').order('created_at',{ascending:false});
   adminProjects = projects || [];
-  const opts = '<option value="">— Sélectionner un projet —</option>' +
+  const opts = '<option value="">â SÃ©lectionner un projet â</option>' +
     adminProjects.map(p=>`<option value="${p.id}">${p.name} (${p.clients?.full_name||'?'})</option>`).join('');
   ['proj-select-project','phases-project-select','docs-proj-select'].forEach(id=>{
     const s=document.getElementById(id); const cur=s.value; s.innerHTML=opts; if(cur) s.value=cur;
@@ -712,7 +712,7 @@ function quickGoPhases(projId) {
 }
 
 // ============================================================
-// ADMIN — CREATE CLIENT
+// ADMIN â CREATE CLIENT
 // ============================================================
 async function createClient() {
   const name     = v('nc-name'), email    = v('nc-email'),
@@ -720,7 +720,7 @@ async function createClient() {
         notes    = v('nc-notes'), projName = v('nc-proj-name'),
         projAddr = v('nc-proj-addr'), password = v('nc-password');
   if (!name||!email||!projName||!password) { toast('Nom, email, projet et mot de passe requis.','error'); return; }
-  if (password.length<8) { toast('Mot de passe : 8 caractères minimum.','error'); return; }
+  if (password.length<8) { toast('Mot de passe : 8 caractÃ¨res minimum.','error'); return; }
   try {
     const { data:authData, error:authErr } = await sbAdmin.auth.admin.createUser({ email, password, email_confirm:true });
     if (authErr) throw new Error(authErr.message);
@@ -730,7 +730,7 @@ async function createClient() {
     if (pErr) throw new Error(pErr.message);
     const phInserts = PHASES.map((ph,i)=>({ project_id:pRow.id, phase_key:ph.key, is_enabled:true, is_locked:true, is_completed:false, sort_order:i }));
     await sbAdmin.from('phase_configs').insert(phInserts);
-    toast(`Client "${name}" créé ! Identifiants : ${email} / ${password}`,'success');
+    toast(`Client "${name}" crÃ©Ã© ! Identifiants : ${email} / ${password}`,'success');
     clearClientForm();
     await loadAdminData();
   } catch(e) { toast('Erreur : '+e.message,'error'); }
@@ -739,7 +739,7 @@ function clearClientForm() { ['nc-name','nc-email','nc-phone','nc-address','nc-n
 function v(id) { return document.getElementById(id).value.trim(); }
 
 // ============================================================
-// ADMIN — PROJECT EDIT
+// ADMIN â PROJECT EDIT
 // ============================================================
 function onProjectTabChange() {
   const projId = document.getElementById('proj-select-project').value;
@@ -758,12 +758,12 @@ async function saveProject() {
   if (!selectedProjId) return;
   const { error } = await sbAdmin.from('projects').update({ name:v('ep-name'), property_address:v('ep-addr'), status:document.getElementById('ep-status').value, description:v('ep-desc'), updated_at:new Date().toISOString() }).eq('id',selectedProjId);
   if (error) { toast('Erreur : '+error.message,'error'); return; }
-  toast('Projet mis à jour !','success');
+  toast('Projet mis Ã  jour !','success');
   await loadAdminProjectSelects();
 }
 
 // ============================================================
-// ADMIN — PHASES
+// ADMIN â PHASES
 // ============================================================
 async function onPhasesProjectChange() {
   const projId = document.getElementById('phases-project-select').value;
@@ -780,15 +780,15 @@ async function onPhasesProjectChange() {
       <div class="pc-label">${ph.icon} ${ph.label} ${isOpt?'<span class="badge badge-gray" style="font-size:10px">Option</span>':''}</div>
       <div class="pc-controls">
         <div class="toggle-group">
-          <label>Activé</label>
+          <label>ActivÃ©</label>
           <label class="toggle-switch"><input type="checkbox" id="pc-en-${ph.key}" ${cfg.is_enabled?'checked':''}><span class="toggle-slider"></span></label>
         </div>
         <div class="toggle-group">
-          <label>Déverrouillé</label>
+          <label>DÃ©verrouillÃ©</label>
           <label class="toggle-switch"><input type="checkbox" id="pc-un-${ph.key}" ${!cfg.is_locked?'checked':''}><span class="toggle-slider"></span></label>
         </div>
         <div class="toggle-group">
-          <label>Terminé</label>
+          <label>TerminÃ©</label>
           <label class="toggle-switch"><input type="checkbox" id="pc-dn-${ph.key}" ${cfg.is_completed?'checked':''}><span class="toggle-slider"></span></label>
         </div>
       </div>
@@ -809,21 +809,21 @@ async function savePhaseConfigs() {
   }));
   const { error } = await sbAdmin.from('phase_configs').upsert(upserts,{onConflict:'project_id,phase_key'});
   if (error) { toast('Erreur : '+error.message,'error'); return; }
-  toast('Phases enregistrées !','success');
+  toast('Phases enregistrÃ©es !','success');
   await loadAdminStats();
 }
 
 // ============================================================
-// ADMIN — DOCUMENTS
+// ADMIN â DOCUMENTS
 // ============================================================
 async function onDocsProjectChange() {
   const projId = document.getElementById('docs-proj-select').value;
   const panel  = document.getElementById('docs-upload-panel');
   if (!projId) { panel.classList.add('hidden'); return; }
   const phSel = document.getElementById('docs-phase-select');
-  phSel.innerHTML = '<option value="">— Phase —</option>' + PHASES.map(ph=>`<option value="${ph.key}">${ph.icon} ${ph.label}</option>`).join('');
+  phSel.innerHTML = '<option value="">â Phase â</option>' + PHASES.map(ph=>`<option value="${ph.key}">${ph.icon} ${ph.label}</option>`).join('');
   panel.classList.remove('hidden');
-  document.getElementById('admin-docs-list').innerHTML = '<div class="docs-empty">Sélectionnez une phase.</div>';
+  document.getElementById('admin-docs-list').innerHTML = '<div class="docs-empty">SÃ©lectionnez une phase.</div>';
 }
 
 async function loadAdminDocs() {
@@ -835,34 +835,34 @@ async function loadAdminDocs() {
   if (!docs?.length) { c.innerHTML='<div class="docs-empty">Aucun document pour cette phase.</div>'; return; }
   c.innerHTML = '<div class="docs-grid">' + docs.map(d=>`
     <div class="doc-item">
-      <div class="doc-icon">${DOC_ICONS[d.doc_type]||'📄'}</div>
+      <div class="doc-icon">${DOC_ICONS[d.doc_type]||'ð'}</div>
       <div class="doc-info">
         <div class="doc-title">${d.title}</div>
-        <div class="doc-meta">${d.doc_type} · ${d.file_size?fmtBytes(d.file_size):'—'} · ${new Date(d.uploaded_at).toLocaleDateString('fr-FR')}</div>
+        <div class="doc-meta">${d.doc_type} Â· ${d.file_size?fmtBytes(d.file_size):'â'} Â· ${new Date(d.uploaded_at).toLocaleDateString('fr-FR')}</div>
       </div>
       <div class="doc-actions">
-        <button class="btn btn-danger btn-sm" onclick="deleteDocument('${d.id}','${esc(d.storage_path)}')">🗑</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteDocument('${d.id}','${esc(d.storage_path)}')">ð</button>
       </div>
     </div>`).join('') + '</div>';
 }
 
 async function deleteDocument(docId, storagePath) {
-  if (!confirm('Supprimer ce document définitivement ?')) return;
+  if (!confirm('Supprimer ce document dÃ©finitivement ?')) return;
   await sbAdmin.storage.from('client-documents').remove([storagePath]);
   await sbAdmin.from('documents').delete().eq('id',docId);
-  toast('Document supprimé.','success');
+  toast('Document supprimÃ©.','success');
   await loadAdminDocs();
   await loadAdminStats();
 }
 
 function onFileSelected(e) {
   selectedFile = e.target.files[0];
-  if (selectedFile) document.getElementById('selected-file-name').textContent = `📎 ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
+  if (selectedFile) document.getElementById('selected-file-name').textContent = `ð ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
 }
 function onFileDrop(e) {
   e.preventDefault(); document.getElementById('upload-area').classList.remove('drag-over');
   selectedFile = e.dataTransfer.files[0];
-  if (selectedFile) document.getElementById('selected-file-name').textContent = `📎 ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
+  if (selectedFile) document.getElementById('selected-file-name').textContent = `ð ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
 }
 
 async function uploadDocument() {
@@ -871,11 +871,11 @@ async function uploadDocument() {
   const title    = v('doc-title');
   const docType  = document.getElementById('doc-type').value;
   const desc     = v('doc-desc');
-  if (!projId||!phaseKey) { toast('Sélectionnez un projet et une phase.','error'); return; }
+  if (!projId||!phaseKey) { toast('SÃ©lectionnez un projet et une phase.','error'); return; }
   if (!title) { toast('Le titre est requis.','error'); return; }
-  if (!selectedFile) { toast('Sélectionnez un fichier.','error'); return; }
+  if (!selectedFile) { toast('SÃ©lectionnez un fichier.','error'); return; }
   const btn = document.getElementById('upload-btn');
-  btn.disabled=true; btn.textContent='Upload…';
+  btn.disabled=true; btn.textContent='Uploadâ¦';
   const prog = document.getElementById('upload-progress');
   const bar  = document.getElementById('upload-progress-bar');
   prog.style.display='block'; bar.style.width='0%';
@@ -888,18 +888,18 @@ async function uploadDocument() {
     bar.style.width='100%';
     const { error:dbErr } = await sbAdmin.from('documents').insert({ project_id:projId, phase_key:phaseKey, doc_type:docType, title, description:desc, storage_path:storagePath, file_name:selectedFile.name, file_size:selectedFile.size, mime_type:selectedFile.type, uploaded_by:currentUser?.email });
     if (dbErr) throw new Error(dbErr.message);
-    toast('Document uploadé !','success');
+    toast('Document uploadÃ© !','success');
     ['doc-title','doc-desc'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('doc-file-input').value='';
     document.getElementById('selected-file-name').textContent='';
     selectedFile=null; prog.style.display='none'; bar.style.width='0%';
     await loadAdminDocs(); await loadAdminStats();
   } catch(e) { toast('Erreur : '+e.message,'error'); prog.style.display='none'; }
-  btn.disabled=false; btn.textContent='⬆ Uploader';
+  btn.disabled=false; btn.textContent='â¬ Uploader';
 }
 
 // ============================================================
-// ADMIN — TABS
+// ADMIN â TABS
 // ============================================================
 function switchAdminTab(tab, el) {
   document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
@@ -922,7 +922,7 @@ function toast(msg, type='info') {
   const c=document.getElementById('toast-container');
   const el=document.createElement('div');
   el.className=`toast toast-${type}`;
-  el.innerHTML<`<span>${{success:'✓',error:'✕',info:'ℹ'}[type]||'•'}</span><span>${msg}</span>`;
+  el.innerHTML=`<span>${{success:'â',error:'â',info:'â¹'}[type]||'â¢'}</span><span>${msg}</span>`;
   c.appendChild(el);
   setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity 0.3s'; setTimeout(()=>el.remove(),300); },5000);
 }
