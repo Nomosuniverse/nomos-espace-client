@@ -453,6 +453,7 @@ async function routeUser() {
   const { data:adminRow } = await sb.from('admins').select('id').eq('auth_user_id', currentUser.id).maybeSingle();
   if (adminRow) {
     isAdmin = true;
+    if (!sbAdmin) sbAdmin = supabase.createClient(SUPABASE_URL, SUPABASE_SVC, { auth:{ persistSession:false, autoRefreshToken:false } });
     document.getElementById('admin-user-email').textContent = currentUser.email;
     showPage('admin');
     await loadAdminData();
