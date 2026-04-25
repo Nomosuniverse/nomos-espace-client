@@ -480,8 +480,7 @@ async function doLogin() {
 function showLoginErr(msg) { const e=document.getElementById('login-error'); e.textContent=msg; e.classList.remove('hidden'); }
 async function doLogout() {
   try { await sb.auth.signOut(); } catch(e) { console.warn('signOut error:', e); }
-  currentUser=null; isAdmin=false; clientData=null; projectData=null; phaseMap={}; docsMap={};
-  showPage('login');
+  location.reload();
 }
 document.addEventListener('keydown', e => { if(e.key==='Enter' && !document.getElementById('page-login').classList.contains('hidden')) doLogin(); });
 
