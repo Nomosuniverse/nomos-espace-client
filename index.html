@@ -31,8 +31,8 @@
     .btn-gold:hover { background: var(--gold2); transform: translateY(-1px); }
     .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
     .btn-outline:hover { background: rgba(201,168,138,0.1); }
-    .btn-ghost { background: transparent; color: var(--gray); border: 1px solid var(--border); }
-    .btn-ghost:hover { border-color: var(--gray2); color: var(--white); }
+    .btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--gray2); cursor: pointer; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.08); }
     .btn-sm { padding: 7px 14px; font-size: 11px; }
     .btn-danger { background: rgba(229,57,53,0.15); color: var(--red); border: 1px solid rgba(229,57,53,0.3); }
     .btn-danger:hover { background: rgba(229,57,53,0.25); }
@@ -479,7 +479,7 @@ async function doLogin() {
 }
 function showLoginErr(msg) { const e=document.getElementById('login-error'); e.textContent=msg; e.classList.remove('hidden'); }
 async function doLogout() {
-  await sb.auth.signOut();
+  try { await sb.auth.signOut(); } catch(e) { console.warn('signOut error:', e); }
   currentUser=null; isAdmin=false; clientData=null; projectData=null; phaseMap={}; docsMap={};
   showPage('login');
 }
