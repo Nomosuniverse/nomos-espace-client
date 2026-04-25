@@ -666,10 +666,10 @@ async function loadAdminData() {
 
 async function loadAdminStats() {
   const [{ count:c },{ count:p },{ count:d },{ count:ph }] = await Promise.all([
-    sb.from('clients').select('*',{count:'exact',head:true}),
-    sb.from('projects').select('*',{count:'exact',head:true}),
-    sb.from('documents').select('*',{count:'exact',head:true}),
-    sb.from('phase_configs').select('*',{count:'exact',head:true}).eq('is_enabled',true),
+    sbAdmin.from('clients').select('*',{count:'exact',head:true}),
+    sbAdmin.from('projects').select('*',{count:'exact',head:true}),
+    sbAdmin.from('documents').select('*',{count:'exact',head:true}),
+    sbAdmin.from('phase_configs').select('*',{count:'exact',head:true}).eq('is_enabled',true),
   ]);
   document.getElementById('stat-clients').textContent = c||0;
   document.getElementById('stat-projects').textContent = p||0;
@@ -678,7 +678,7 @@ async function loadAdminStats() {
 }
 
 async function loadAdminClients() {
-  const { data:clients } = await sb.from('clients').select('*, projects(id,name,status)').order('created_at',{ascending:false});
+  const { data:clients } = await sbAdmin.from('clients').select('*, projects(id,name,status)').order('created_at',{ascending:false});
   const container = document.getElementById('admin-client-list');
   if (!clients?.length) { container.innerHTML=`<div class="empty-state"><div class="es-icon">👥</div><h3>Aucun client</h3><p>Créez votre premier client ci-dessus.</p></div>`; return; }
   container.innerHTML = clients.map(c => {
@@ -697,7 +697,7 @@ async function loadAdminClients() {
 }
 
 async function loadAdminProjectSelects() {
-  const { data:projects } = await sb.from('projects').select('*, clients(full_name)').order('created_at',{ascending:false});
+  const { data:projects } = await sbAdmin.from('projects').select('*, clients(full_name)').order('created_at',{ascending:false});
   adminProjects = projects || [];
   const opts = '<option value="">— Sélectionner un projet —</option>' +
     adminProjects.map(p=>`<option value="${p.id}">${p.name} (${p.clients?.full_name||'?'})</option>`).join('');
