@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nomos Universe — Espace Client</title>
+  <title>Nomos Universe â Espace Client</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -169,7 +169,69 @@
       .panel-grid { grid-template-columns: 1fr; }
       .stats-row { grid-template-columns: repeat(2,1fr); }
       .pc-controls { gap: 10px; }
+      .shopping-card-body { flex-wrap: wrap; }
+      .shopping-card-actions { width: 100%; justify-content: flex-start; margin-top: 8px; }
+      .shopping-admin-grid { grid-template-columns: 1fr; }
+      .shopping-totals { flex-direction: column; text-align: center; gap: 16px; }
     }
+
+    /* ââ PORTAL NAV TABS ââ */
+    .portal-nav { display:flex; gap:0; border-bottom:1px solid var(--border); margin-bottom:28px; }
+    .portal-nav-btn { padding:12px 20px; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; font-weight:500; background:transparent; border:none; color:var(--gray); cursor:pointer; border-bottom:2px solid transparent; transition:var(--transition); }
+    .portal-nav-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+    .portal-nav-btn:hover:not(.active) { color:var(--white); }
+
+    /* ââ SHOPPING CLIENT ââ */
+    .shopping-category-title { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin:28px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+    .shopping-grid { display:flex; flex-direction:column; gap:12px; }
+    .shopping-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:border-color var(--transition); }
+    .shopping-card.status-validated { border-left:3px solid var(--green); }
+    .shopping-card.status-refused { border-left:3px solid var(--red); }
+    .shopping-card-body { display:flex; align-items:center; gap:16px; padding:16px; }
+    .shopping-card-photo { width:80px; height:80px; border-radius:var(--radius-sm); background:var(--bg3); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:28px; overflow:hidden; }
+    .shopping-card-photo img { width:100%; height:100%; object-fit:cover; border-radius:var(--radius-sm); }
+    .shopping-card-info { flex:1; min-width:0; }
+    .shopping-card-name { font-size:14px; font-weight:500; color:var(--white); margin-bottom:4px; }
+    .shopping-card-ref { font-size:12px; color:var(--gray2); margin-bottom:6px; }
+    .shopping-card-price { font-size:16px; font-weight:600; color:var(--gold); }
+    .shopping-card-actions { display:flex; gap:8px; align-items:center; flex-shrink:0; flex-wrap:wrap; justify-content:flex-end; }
+    .shopping-card-footer { padding:10px 16px; background:var(--bg3); border-top:1px solid var(--border); font-size:12px; color:var(--gray); display:flex; align-items:flex-start; gap:6px; }
+    .shopping-card-alternative { color:var(--gold); font-style:italic; }
+    .btn-validate { background:rgba(76,175,80,0.15); color:var(--green); border:1px solid rgba(76,175,80,0.3); }
+    .btn-validate:hover { background:rgba(76,175,80,0.25); }
+    .btn-validate.active { background:rgba(76,175,80,0.3); color:var(--green); font-weight:600; }
+    .btn-refuse { background:rgba(229,57,53,0.12); color:var(--red); border:1px solid rgba(229,57,53,0.3); }
+    .btn-refuse:hover { background:rgba(229,57,53,0.22); }
+    .btn-refuse.active { background:rgba(229,57,53,0.25); color:var(--red); font-weight:600; }
+    .shopping-empty { text-align:center; padding:60px 20px; color:var(--gray); }
+
+    /* ââ SHOPPING TOTALS ââ */
+    .shopping-totals { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:20px 28px; margin-top:32px; display:flex; gap:24px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+    .shopping-total-item { text-align:center; }
+    .shopping-total-value { font-size:20px; font-weight:600; color:var(--white); }
+    .shopping-total-label { font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--gray); margin-top:3px; }
+    .shopping-total-main .shopping-total-value { font-size:26px; color:var(--gold); }
+
+    /* ââ SHOPPING MODAL ââ */
+    .shopping-modal { position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px; }
+    .shopping-modal-box { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); width:100%; max-width:480px; padding:28px; }
+    .shopping-modal-title { font-size:15px; font-weight:500; margin-bottom:6px; }
+    .shopping-modal-sub { font-size:13px; color:var(--gray); margin-bottom:20px; }
+
+    /* ââ ADMIN SHOPPING ââ */
+    .shopping-admin-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+    .shopping-admin-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px; display:flex; gap:12px; align-items:flex-start; }
+    .shopping-admin-photo { width:56px; height:56px; border-radius:var(--radius-sm); background:var(--bg2); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:20px; overflow:hidden; }
+    .shopping-admin-photo img { width:100%; height:100%; object-fit:cover; border-radius:var(--radius-sm); }
+    .shopping-admin-info { flex:1; min-width:0; }
+    .shopping-admin-name { font-size:13px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--white); }
+    .shopping-admin-price { font-size:13px; color:var(--gold); margin-top:2px; }
+    .shopping-admin-meta { font-size:11px; color:var(--gray); margin-top:3px; }
+    .shopping-admin-status { display:inline-block; font-size:10px; padding:2px 8px; border-radius:10px; margin-top:4px; }
+    .status-pending { background:rgba(139,125,110,0.2); color:var(--gray); }
+    .status-validated { background:rgba(76,175,80,0.15); color:var(--green); }
+    .status-refused { background:rgba(229,57,53,0.15); color:var(--red); }
+    .link-toggle { display:flex; align-items:center; gap:10px; padding:10px 0; }
   </style>
 </head>
 <body>
@@ -196,7 +258,7 @@
         <p class="logo-sub" style="font-size:11px;letter-spacing:3px">ESPACE CLIENT</p>
         <div style="margin-top:32px">
           <h1 style="font-size:24px;font-weight:300;color:var(--white)">Connexion</h1>
-          <p style="margin-top:8px;font-size:13px">Accédez à votre espace projet personnalisé</p>
+          <p style="margin-top:8px;font-size:13px">AccÃ©dez Ã  votre espace projet personnalisÃ©</p>
         </div>
       </div>
       <div class="login-form">
@@ -206,7 +268,7 @@
         </div>
         <div class="field">
           <label>Mot de passe</label>
-          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" />
+          <input type="password" id="login-password" placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" autocomplete="current-password" />
         </div>
         <button class="btn btn-gold" id="login-btn" onclick="doLogin()">
           <span id="login-btn-text">Se connecter</span>
@@ -214,7 +276,7 @@
         <div id="login-error" class="hidden" style="background:rgba(229,57,53,0.1);border:1px solid rgba(229,57,53,0.3);border-radius:8px;padding:12px 16px;font-size:13px;color:#E53935;text-align:center"></div>
       </div>
       <div style="text-align:center;margin-top:24px;font-size:12px;color:var(--gray2)">
-        Mot de passe oublié ? Contactez <a href="mailto:contact@nomosuniverse.com">contact@nomosuniverse.com</a>
+        Mot de passe oubliÃ© ? Contactez <a href="mailto:contact@nomosuniverse.com">contact@nomosuniverse.com</a>
       </div>
     </div>
   </div>
@@ -224,35 +286,69 @@
 <div id="page-portal" class="hidden">
   <header class="portal-header">
     <div style="display:flex;align-items:center;gap:20px">
-      <div><p class="logo" style="font-size:12px;letter-spacing:4px">NOMOS UNIVERSE</p><p class="logo-sub">ESPACE CLIENT </p></div>
+      <div><p class="logo" style="font-size:12px;letter-spacing:4px">NOMOS UNIVERSE</p><p class="logo-sub">ESPACE CLIENT</p></div>
     </div>
     <div style="display:flex;align-items:center;gap:12px">
-      <span style="font-size:13px;color:var(--gray)">Bonjour, <strong id="portal-client-name" style="color:var(--white)">—</strong></span>
-      <button type="button" class="btn btn-sm" onclick="doLogout()" style="background:rgba(229,57,53,0.15);color:#ef5350;border:1px solid rgba(229,57,53,0.4);cursor:pointer;">⏻ Déconnexion</button>
+      <span style="font-size:13px;color:var(--gray)">Bonjour, <strong id="portal-client-name" style="color:var(--white)">â</strong></span>
+      <button type="button" class="btn btn-sm" onclick="doLogout()" style="background:rgba(229,57,53,0.15);color:#ef5350;border:1px solid rgba(229,57,53,0.4);cursor:pointer;">â» DÃ©connexion</button>
     </div>
   </header>
   <div class="portal-body">
     <div class="project-hero">
-      <h1 id="portal-project-name">Chargement…</h1>
+      <h1 id="portal-project-name">Chargementâ¦</h1>
       <div style="display:flex;align-items:center;gap:12px;margin-top:6px">
         <span id="portal-project-address" style="font-size:13px;color:var(--gray)"></span>
         <span id="portal-project-status" class="badge badge-gold"></span>
       </div>
       <div class="status-bar" id="progress-bar"></div>
     </div>
-    <p class="phases-title">Suivi de votre projet</p>
-    <div class="phases-grid" id="phases-container"></div>
+    <!-- Navigation tabs -->
+    <nav class="portal-nav">
+      <button class="portal-nav-btn active" onclick="switchPortalTab('phases',this)">ð Mon Projet</button>
+      <button class="portal-nav-btn" onclick="switchPortalTab('shopping',this)">ð Shopping Liste</button>
+    </nav>
+    <!-- PHASES section -->
+    <div id="portal-section-phases">
+      <p class="phases-title">Suivi de votre projet</p>
+      <div class="phases-grid" id="phases-container"></div>
+    </div>
+    <!-- SHOPPING section -->
+    <div id="portal-section-shopping" class="hidden">
+      <div id="shopping-client-content">
+        <div class="shopping-empty"><div style="font-size:36px;margin-bottom:12px">ð</div><p>Votre shopping liste sera disponible ici.</p></div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ===== PDF MODAL -==== -->
+<!-- ===== SHOPPING MODAL (commentaire / alternative) ===== -->
+<div id="shopping-modal" class="shopping-modal hidden">
+  <div class="shopping-modal-box">
+    <div class="shopping-modal-title" id="shopping-modal-item-name">Article</div>
+    <div class="shopping-modal-sub">Proposez une alternative ou laissez un commentaire</div>
+    <div class="field" style="margin-bottom:14px">
+      <label>Votre alternative (optionnel)</label>
+      <input type="text" id="shopping-modal-alternative" placeholder="Ex : MÃªme modÃ¨le en coloris blanc, rÃ©f. ABC123" />
+    </div>
+    <div class="field" style="margin-bottom:20px">
+      <label>Commentaire (optionnel)</label>
+      <textarea id="shopping-modal-comment" placeholder="PrÃ©cisez votre demandeâ¦" style="min-height:80px"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-ghost btn-sm" onclick="closeShoppingModal()">Annuler</button>
+      <button class="btn btn-gold btn-sm" onclick="saveShoppingFeedback()">â Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PDF MODAL ===== -->
 <div id="pdf-modal" class="hidden">
   <div class="pdf-modal-box">
     <div class="pdf-modal-header">
       <span style="font-size:14px;font-weight:500" id="pdf-modal-title">Document</span>
       <div style="display:flex;gap:8px;align-items:center">
-        <button class="btn btn-outline btn-sm" id="pdf-download-btn">⬇ Télécharger</button>
-        <button class="close-btn" onclick="closePdfModal()">✕</button>
+        <button class="btn btn-outline btn-sm" id="pdf-download-btn">â¬ TÃ©lÃ©charger</button>
+        <button class="close-btn" onclick="closePdfModal()">â</button>
       </div>
     </div>
     <div class="pdf-modal-body">
@@ -260,7 +356,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- ===== ADMIN ===== -->
 <div id="page-admin" class="hidden">
@@ -271,62 +366,63 @@
     </div>
     <div style="display:flex;align-items:center;gap:12px">
       <span style="font-size:13px;color:var(--gray)" id="admin-user-email"></span>
-      <button type="button" class="btn btn-sm" onclick="doLogout()" style="background:rgba(229,57,53,0.15);color:#ef5350;border:1px solid rgba(229,57,53,0.4);cursor:pointer;">⏻ Déconnexion</button>
+      <button type="button" class="btn btn-sm" onclick="doLogout()" style="background:rgba(229,57,53,0.15);color:#ef5350;border:1px solid rgba(229,57,53,0.4);cursor:pointer;">â» DÃ©connexion</button>
     </div>
   </header>
   <div class="admin-body">
     <!-- Stats -->
     <div class="stats-row">
-      <div class="stat-card"><div class="stat-value" id="stat-clients">—</div><div class="stat-label">Clients</div></div>
-      <div class="stat-card"><div class="stat-value" id="stat-projects">—</div><div class="stat-label">Projets</div></div>
-      <div class="stat-card"><div class="stat-value" id="stat-docs">—</div><div class="stat-label">Documents</div></div>
-      <div class="stat-card"><div class="stat-value" id="stat-phases">—</div><div class="stat-label">Phases actives</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-clients">â</div><div class="stat-label">Clients</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-projects">â</div><div class="stat-label">Projets</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-docs">â</div><div class="stat-label">Documents</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-phases">â</div><div class="stat-label">Phases actives</div></div>
     </div>
     <!-- Tabs -->
     <div class="admin-tabs">
-      <button class="admin-tab active" onclick="switchAdminTab('clients',this)">👥 Clients</button>
-      <button class="admin-tab" onclick="switchAdminTab('project',this)">📁 Projet</button>
-      <button class="admin-tab" onclick="switchAdminTab('phases',this)">🗂 Phases</button>
-      <button class="admin-tab" onclick="switchAdminTab('documents',this)">📄 Documents</button>
+      <button class="admin-tab active" onclick="switchAdminTab('clients',this)">ð¥ Clients</button>
+      <button class="admin-tab" onclick="switchAdminTab('project',this)">ð Projet</button>
+      <button class="admin-tab" onclick="switchAdminTab('phases',this)">ð Phases</button>
+      <button class="admin-tab" onclick="switchAdminTab('documents',this)">ð Documents</button>
+      <button class="admin-tab" onclick="switchAdminTab('shopping',this)">ð Shopping</button>
     </div>
 
     <!-- TAB: CLIENTS -->
     <div id="admin-tab-clients">
       <div class="panel">
-        <div class="panel-title">➕ Nouveau client</div>
+        <div class="panel-title">â Nouveau client</div>
         <div class="panel-grid">
           <div class="field"><label>Nom complet *</label><input type="text" id="nc-name" placeholder="Marie Dupont" /></div>
           <div class="field"><label>Email (identifiant) *</label><input type="email" id="nc-email" placeholder="marie@exemple.com" /></div>
-          <div class="field"><label>Téléphone</label><input type="text" id="nc-phone" placeholder="+33 6 12 34 56 78" /></div>
+          <div class="field"><label>TÃ©lÃ©phone</label><input type="text" id="nc-phone" placeholder="+33 6 12 34 56 78" /></div>
           <div class="field"><label>Ville / Adresse client</label><input type="text" id="nc-address" placeholder="Paris, France" /></div>
         </div>
-        <div class="field" style="margin-top:12px"><label>Notes internes</label><textarea id="nc-notes" placeholder="Notes sur ce client…"></textarea></div>
-        <div class="divider-text">Projet associé</div>
+        <div class="field" style="margin-top:12px"><label>Notes internes</label><textarea id="nc-notes" placeholder="Notes sur ce clientâ¦"></textarea></div>
+        <div class="divider-text">Projet associÃ©</div>
         <div class="panel-grid">
-          <div class="field"><label>Nom du projet *</label><input type="text" id="nc-proj-name" placeholder="Rénovation Appartement Paris 11" /></div>
+          <div class="field"><label>Nom du projet *</label><input type="text" id="nc-proj-name" placeholder="RÃ©novation Appartement Paris 11" /></div>
           <div class="field"><label>Adresse du bien</label><input type="text" id="nc-proj-addr" placeholder="15 rue Exemple, 75011 Paris" /></div>
         </div>
-        <div class="field" style="margin-top:12px"><label>Mot de passe temporaire *</label><input type="text" id="nc-password" placeholder="Minimum 8 caractères" /></div>
+        <div class="field" style="margin-top:12px"><label>Mot de passe temporaire *</label><input type="text" id="nc-password" placeholder="Minimum 8 caractÃ¨res" /></div>
         <div class="panel-actions">
           <button class="btn btn-ghost" onclick="clearClientForm()">Effacer</button>
-          <button class="btn btn-gold" onclick="createClient()">✓ Créer le client</button>
+          <button class="btn btn-gold" onclick="createClient()">â CrÃ©er le client</button>
         </div>
       </div>
       <p class="section-title">Clients existants</p>
       <div class="client-list" id="admin-client-list">
-        <div class="empty-state"><div class="es-icon">👥</div><h3>Aucun client</h3><p>Créez votre premier client ci-dessus.</p></div>
+        <div class="empty-state"><div class="es-icon">ð¥</div><h3>Aucun client</h3><p>CrÃ©ez votre premier client ci-dessus.</p></div>
       </div>
     </div>
 
     <!-- TAB: PROJECT -->
     <div id="admin-tab-project" class="hidden">
       <div class="project-select-row">
-        <select id="proj-select-project" onchange="onProjectTabChange()"><option value="">— Sélectionner un projet —</option></select>
-        <button class="btn btn-ghost btn-sm" onclick="loadAdminProjectSelects()">↻</button>
+        <select id="proj-select-project" onchange="onProjectTabChange()"><option value="">â SÃ©lectionner un projet â</option></select>
+        <button class="btn btn-ghost btn-sm" onclick="loadAdminProjectSelects()">â»</button>
       </div>
       <div id="project-edit-panel" class="hidden">
         <div class="panel">
-          <div class="panel-title">✏️ Modifier le projet</div>
+          <div class="panel-title">âï¸ Modifier le projet</div>
           <div class="panel-grid">
             <div class="field"><label>Nom du projet</label><input type="text" id="ep-name" /></div>
             <div class="field"><label>Adresse du bien</label><input type="text" id="ep-addr" /></div>
@@ -336,7 +432,7 @@
             <select id="ep-status">
               <option value="en_cours">En cours</option>
               <option value="pause">En pause</option>
-              <option value="termine">Terminé</option>
+              <option value="termine">TerminÃ©</option>
               <option value="suspendu">Suspendu</option>
             </select>
           </div>
@@ -349,14 +445,14 @@
     <!-- TAB: PHASES -->
     <div id="admin-tab-phases" class="hidden">
       <div class="project-select-row">
-        <select id="phases-project-select" onchange="onPhasesProjectChange()"><option value="">— Sélectionner un projet —</option></select>
+        <select id="phases-project-select" onchange="onPhasesProjectChange()"><option value="">â SÃ©lectionner un projet â</option></select>
       </div>
       <div id="phases-config-panel" class="hidden">
         <div class="panel">
-          <div class="panel-title">🗂 Configuration des phases</div>
-          <p style="font-size:13px;color:var(--gray);margin-bottom:16px">Activez, verrouillez ou marquez les phases comme terminées. Les phases désactivées sont masquées pour le client.</p>
+          <div class="panel-title">ð Configuration des phases</div>
+          <p style="font-size:13px;color:var(--gray);margin-bottom:16px">Activez, verrouillez ou marquez les phases comme terminÃ©es. Les phases dÃ©sactivÃ©es sont masquÃ©es pour le client.</p>
           <div id="phase-config-grid"></div>
-          <div class="panel-actions"><button class="btn btn-gold" onclick="savePhaseConfigs()">✓ Enregistrer les phases</button></div>
+          <div class="panel-actions"><button class="btn btn-gold" onclick="savePhaseConfigs()">â Enregistrer les phases</button></div>
         </div>
       </div>
     </div>
@@ -364,14 +460,14 @@
     <!-- TAB: DOCUMENTS -->
     <div id="admin-tab-documents" class="hidden">
       <div class="project-select-row">
-        <select id="docs-proj-select" onchange="onDocsProjectChange()"><option value="">— Sélectionner un projet —</option></select>
-        <select id="docs-phase-select" onchange="loadAdminDocs()" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--white);padding:8px 14px;font-size:13px;outline:none;flex:1"><option value="">— Phase —</option></select>
+        <select id="docs-proj-select" onchange="onDocsProjectChange()"><option value="">â SÃ©lectionner un projet â</option></select>
+        <select id="docs-phase-select" onchange="loadAdminDocs()" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--white);padding:8px 14px;font-size:13px;outline:none;flex:1"><option value="">â Phase â</option></select>
       </div>
       <div id="docs-upload-panel" class="hidden">
         <div class="panel">
-          <div class="panel-title">⬆️ Ajouter un document</div>
+          <div class="panel-title">â¬ï¸ Ajouter un document</div>
           <div class="panel-grid">
-            <div class="field"><label>Titre *</label><input type="text" id="doc-title" placeholder="Planche tendance – Salon" /></div>
+            <div class="field"><label>Titre *</label><input type="text" id="doc-title" placeholder="Planche tendance â Salon" /></div>
             <div class="field"><label>Type</label>
               <select id="doc-type">
                 <option value="pdf">Document PDF</option>
@@ -384,20 +480,89 @@
               </select>
             </div>
           </div>
-          <div class="field" style="margin-top:10px"><label>Description (optionnel)</label><input type="text" id="doc-desc" placeholder="Description courte…" /></div>
+          <div class="field" style="margin-top:10px"><label>Description (optionnel)</label><input type="text" id="doc-desc" placeholder="Description courteâ¦" /></div>
           <div class="upload-area" id="upload-area" onclick="document.getElementById('doc-file-input').click()" ondragover="e=>{e.preventDefault();document.getElementById('upload-area').classList.add('drag-over')}" ondragleave="document.getElementById('upload-area').classList.remove('drag-over')" ondrop="onFileDrop(event)">
             <input type="file" id="doc-file-input" accept=".pdf,.png,.jpg,.jpeg,.zip" onchange="onFileSelected(event)" />
-            <div style="font-size:32px;margin-bottom:10px">📎</div>
+            <div style="font-size:32px;margin-bottom:10px">ð</div>
             <div style="font-size:14px;color:var(--gray)">Cliquez ou glissez un fichier ici</div>
-            <div style="font-size:12px;color:var(--gray2);margin-top:6px">PDF, PNG, JPG, ZIP — Max 50MB</div>
+            <div style="font-size:12px;color:var(--gray2);margin-top:6px">PDF, PNG, JPG, ZIP â Max 50MB</div>
             <div id="selected-file-name" style="margin-top:10px;font-size:13px;color:var(--gold);font-weight:500"></div>
             <div class="upload-progress" id="upload-progress" style="display:none;margin-top:10px"><div class="upload-progress-bar" id="upload-progress-bar"></div></div>
           </div>
-          <div class="panel-actions"><button class="btn btn-gold" id="upload-btn" onclick="uploadDocument()">⬆ Uploader</button></div>
+          <div class="panel-actions"><button class="btn btn-gold" id="upload-btn" onclick="uploadDocument()">â¬ Uploader</button></div>
         </div>
         <div class="panel">
-          <div class="panel-title">📄 Documents de la phase</div>
-          <div id="admin-docs-list"><div class="docs-empty">Sélectionnez un projet et une phase.</div></div>
+          <div class="panel-title">ð Documents de la phase</div>
+          <div id="admin-docs-list"><div class="docs-empty">SÃ©lectionnez un projet et une phase.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: SHOPPING -->
+    <div id="admin-tab-shopping" class="hidden">
+      <div class="project-select-row">
+        <select id="shopping-proj-select" onchange="onShoppingProjectChange()"><option value="">â SÃ©lectionner un projet â</option></select>
+        <button class="btn btn-ghost btn-sm" onclick="loadAdminProjectSelects()">â»</button>
+      </div>
+      <div id="shopping-admin-panel" class="hidden">
+        <!-- Formulaire ajout article -->
+        <div class="panel">
+          <div class="panel-title">â Ajouter un article</div>
+          <div class="panel-grid">
+            <div class="field"><label>Nom de l'article *</label><input type="text" id="sh-name" placeholder="CanapÃ© 3 places en velours" /></div>
+            <div class="field"><label>RÃ©fÃ©rence</label><input type="text" id="sh-ref" placeholder="REF-12345" /></div>
+            <div class="field"><label>CatÃ©gorie</label>
+              <select id="sh-category">
+                <option value="GÃ©nÃ©ral">GÃ©nÃ©ral</option>
+                <option value="Mobilier">Mobilier</option>
+                <option value="Luminaires">Luminaires</option>
+                <option value="Textiles">Textiles</option>
+                <option value="DÃ©coration">DÃ©coration</option>
+                <option value="ÃlectromÃ©nager">ÃlectromÃ©nager</option>
+                <option value="Sanitaire">Sanitaire</option>
+                <option value="RevÃªtements">RevÃªtements</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+            <div class="field"><label>Prix (â¬)</label><input type="number" id="sh-price" placeholder="0.00" min="0" step="0.01" /></div>
+          </div>
+          <!-- Lien achat -->
+          <div style="margin-top:12px">
+            <div class="link-toggle">
+              <label class="toggle-switch"><input type="checkbox" id="sh-link-enabled" checked><span class="toggle-slider"></span></label>
+              <span style="font-size:13px;color:var(--white)">Lien d'achat actif</span>
+              <span style="font-size:12px;color:var(--gray)">(dÃ©sactivez si vous gÃ©rez l'achat vous-mÃªme)</span>
+            </div>
+            <div id="sh-link-field" class="field">
+              <label>Lien d'achat</label>
+              <input type="url" id="sh-link" placeholder="https://www.exemple.com/produit" />
+            </div>
+          </div>
+          <!-- Photo -->
+          <div class="field" style="margin-top:12px">
+            <label>Photo du produit</label>
+            <div class="upload-area" id="sh-upload-area" onclick="document.getElementById('sh-photo-input').click()" style="padding:16px;min-height:80px">
+              <input type="file" id="sh-photo-input" accept=".png,.jpg,.jpeg,.webp" onchange="onShoppingPhotoSelected(event)" style="display:none" />
+              <div id="sh-photo-preview" style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:24px">ð¼</span>
+                <span style="font-size:13px;color:var(--gray)">Cliquez pour ajouter une photo (JPG, PNG, WebP)</span>
+              </div>
+            </div>
+          </div>
+          <div class="panel-actions">
+            <button class="btn btn-ghost" onclick="clearShoppingForm()">Effacer</button>
+            <button class="btn btn-gold" onclick="saveShoppingItem()">â Ajouter l'article</button>
+          </div>
+        </div>
+        <!-- Liste des articles -->
+        <div class="panel" style="margin-top:20px">
+          <div class="panel-title" style="display:flex;justify-content:space-between;align-items:center">
+            <span>ð Articles de la shopping liste</span>
+            <span id="sh-admin-count" style="font-size:13px;color:var(--gray)"></span>
+          </div>
+          <div id="shopping-admin-list">
+            <div class="docs-empty">SÃ©lectionnez un projet pour voir les articles.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -413,19 +578,19 @@ const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFz
 const SUPABASE_SVC  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjY3huYXZ0d3prcG1wYnZldmNjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NzA0NTA1NSwiZXhwIjoyMDkyNjIxMDU1fQ.MUi3ZM5jxxoEvCNEx25sWAyGT_G-tK38hSzmJhmLiUw';
 
 const PHASES = [
-  { key:'call_cadrage',          label:'Call Cadrage',               icon:'📞', desc:'Premier échange pour cerner votre projet et vos attentes' },
-  { key:'visite_bien',           label:'Visite du Bien',             icon:'🏠', desc:'Visite sur place et prise de mesures de votre espace' },
-  { key:'clarte_deco',           label:'Clarté Déco',                icon:'✨', desc:'Séance visio pour définir votre style et votre identité déco' },
-  { key:'paiement_confirmation', label:'Paiement & Confirmation',    icon:'✅', desc:"Validation du devis et versement de l'acompte" },
-  { key:'validation_devis',      label:'Validation Devis Travaux',   icon:'📋', desc:'Présentation et validation du devis pour les travaux' },
-  { key:'conception_3d',         label:'Projection 3D & Conception', icon:'🎨', desc:'Planches ambiance, projections 3D, plan 2D et shopping liste' },
-  { key:'travaux',               label:'Travaux',                    icon:'🔨', desc:'Réalisation des travaux selon le planning établi' },
-  { key:'livraison',             label:'Livraison du Chantier',      icon:'🎁', desc:'Livraison et réception officielle de votre espace rénové' },
-  { key:'installation',          label:'Installation',               icon:'🪴', desc:'Installation du mobilier et accessoires (option)' },
+  { key:'call_cadrage',          label:'Call Cadrage',               icon:'ð', desc:'Premier Ã©change pour cerner votre projet et vos attentes' },
+  { key:'visite_bien',           label:'Visite du Bien',             icon:'ð ', desc:'Visite sur place et prise de mesures de votre espace' },
+  { key:'clarte_deco',           label:'ClartÃ© DÃ©co',                icon:'â¨', desc:'SÃ©ance visio pour dÃ©finir votre style et votre identitÃ© dÃ©co' },
+  { key:'paiement_confirmation', label:'Paiement & Confirmation',    icon:'â', desc:"Validation du devis et versement de l'acompte" },
+  { key:'validation_devis',      label:'Validation Devis Travaux',   icon:'ð', desc:'PrÃ©sentation et validation du devis pour les travaux' },
+  { key:'conception_3d',         label:'Projection 3D & Conception', icon:'ð¨', desc:'Planches ambiance, projections 3D, plan 2D et shopping liste' },
+  { key:'travaux',               label:'Travaux',                    icon:'ð¨', desc:'RÃ©alisation des travaux selon le planning Ã©tabli' },
+  { key:'livraison',             label:'Livraison du Chantier',      icon:'ð', desc:'Livraison et rÃ©ception officielle de votre espace rÃ©novÃ©' },
+  { key:'installation',          label:'Installation',               icon:'ðª´', desc:'Installation du mobilier et accessoires (option)' },
 ];
 const SPECIAL = { conception_3d:['plan_2d','shopping_liste'], travaux:['planning_travaux'] };
-const STATUS_LABELS = { en_cours:'En cours', termine:'Terminé', suspendu:'Suspendu', pause:'En pause' };
-const DOC_ICONS = { pdf:'📄', plan_2d:'📐', shopping_liste:'🛒', planning_travaux:'📅', devis:'📋', facture:'🧾', autre:'📎' };
+const STATUS_LABELS = { en_cours:'En cours', termine:'TerminÃ©', suspendu:'Suspendu', pause:'En pause' };
+const DOC_ICONS = { pdf:'ð', plan_2d:'ð', shopping_liste:'ð', planning_travaux:'ð', devis:'ð', facture:'ð§¾', autre:'ð' };
 
 // ============================================================
 // STATE
@@ -434,6 +599,7 @@ let sb, sbAdmin, currentUser, isAdmin = false;
 let clientData, projectData;
 let phaseMap = {}, docsMap = {};
 let adminProjects = [], selectedProjId = null, selectedFile = null;
+let shoppingItems = [], currentShoppingItemId = null, selectedShoppingPhoto = null;
 const isAdminMode = location.search.includes('admin') || location.hash === '#admin';
 
 // ============================================================
@@ -471,7 +637,7 @@ async function doLogin() {
   const btn   = document.getElementById('login-btn');
   const errEl = document.getElementById('login-error');
   if (!email || !pass) { showLoginErr('Veuillez remplir tous les champs.'); return; }
-  btn.disabled = true; document.getElementById('login-btn-text').textContent = 'Connexion…'; errEl.classList.add('hidden');
+  btn.disabled = true; document.getElementById('login-btn-text').textContent = 'Connexionâ¦'; errEl.classList.add('hidden');
   const { data, error } = await sb.auth.signInWithPassword({ email, password:pass });
   if (error) { btn.disabled=false; document.getElementById('login-btn-text').textContent='Se connecter'; showLoginErr('Email ou mot de passe incorrect.'); return; }
   currentUser = data.user;
@@ -511,8 +677,12 @@ async function loadClientPortal() {
   docsMap = {};
   (docs||[]).forEach(d => { if(!docsMap[d.phase_key]) docsMap[d.phase_key]=[]; docsMap[d.phase_key].push(d); });
 
+  const { data:shopItems } = await sb.from('shopping_items').select('*').eq('project_id', projectData.id).order('sort_order');
+  shoppingItems = shopItems || [];
+
   renderProgressBar();
   renderPhases();
+  renderShoppingItems();
 }
 
 function renderProgressBar() {
@@ -546,7 +716,7 @@ function renderPhases() {
 
     let bodyHTML = '';
     if (locked) {
-      bodyHTML = `<div class="lock-overlay"><span style="font-size:20px">🔒</span><span>Cette phase n'est pas encore accessible. Contactez votre designer pour plus d'informations.</span></div>`;
+      bodyHTML = `<div class="lock-overlay"><span style="font-size:20px">ð</span><span>Cette phase n'est pas encore accessible. Contactez votre designer pour plus d'informations.</span></div>`;
     } else {
       // Special items
       if (specTypes.length) {
@@ -554,20 +724,20 @@ function renderPhases() {
         if (specTypes.includes('plan_2d')) {
           const d = pDocs.find(x=>x.doc_type==='plan_2d');
           bodyHTML += d
-            ? `<div class="special-item"><span style="font-size:18px">📐</span><span style="flex:1"><strong>Plan 2D</strong> — ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
-            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">📐</span><span>Plan 2D — En cours de préparation</span></div>`;
+            ? `<div class="special-item"><span style="font-size:18px">ð</span><span style="flex:1"><strong>Plan 2D</strong> â ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
+            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">ð</span><span>Plan 2D â En cours de prÃ©paration</span></div>`;
         }
         if (specTypes.includes('shopping_liste')) {
           const d = pDocs.find(x=>x.doc_type==='shopping_liste');
           bodyHTML += d
-            ? `<div class="special-item"><span style="font-size:18px">🛒</span><span style="flex:1"><strong>Shopping Liste</strong> — ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
-            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">🛒</span><span>Shopping Liste — En cours de préparation</span></div>`;
+            ? `<div class="special-item"><span style="font-size:18px">ð</span><span style="flex:1"><strong>Shopping Liste</strong> â ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
+            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">ð</span><span>Shopping Liste â En cours de prÃ©paration</span></div>`;
         }
         if (specTypes.includes('planning_travaux')) {
           const d = pDocs.find(x=>x.doc_type==='planning_travaux');
           bodyHTML += d
-            ? `<div class="special-item"><span style="font-size:18px">📅</span><span style="flex:1"><strong>Planning Travaux</strong> — ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
-            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">📅</span><span>Planning Travaux — En cours de préparation</span></div>`;
+            ? `<div class="special-item"><span style="font-size:18px">ð</span><span style="flex:1"><strong>Planning Travaux</strong> â ${d.title}</span><button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">Voir</button></div>`
+            : `<div class="special-item" style="opacity:0.5"><span style="font-size:18px">ð</span><span>Planning Travaux â En cours de prÃ©paration</span></div>`;
         }
         bodyHTML += '</div>';
       }
@@ -576,20 +746,20 @@ function renderPhases() {
       if (mainDocs.length) {
         bodyHTML += '<div class="docs-grid">';
         mainDocs.forEach(d => {
-          const icon = DOC_ICONS[d.doc_type]||'📄';
+          const icon = DOC_ICONS[d.doc_type]||'ð';
           const size = d.file_size ? fmtBytes(d.file_size) : '';
           bodyHTML += `<div class="doc-item">
             <div class="doc-icon">${icon}</div>
-            <div class="doc-info"><div class="doc-title">${d.title}</div><div class="doc-meta">${d.description||''} ${size?'· '+size:''}</div></div>
+            <div class="doc-info"><div class="doc-title">${d.title}</div><div class="doc-meta">${d.description||''} ${size?'Â· '+size:''}</div></div>
             <div class="doc-actions">
-              <button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">👁 Voir</button>
-              <button class="btn btn-ghost btn-sm" onclick="downloadDoc('${d.id}','${esc(d.file_name||d.title)}')">⬇</button>
+              <button class="btn btn-outline btn-sm" onclick="openPdf('${d.id}','${esc(d.title)}')">ð Voir</button>
+              <button class="btn btn-ghost btn-sm" onclick="downloadDoc('${d.id}','${esc(d.file_name||d.title)}')">â¬</button>
             </div>
           </div>`;
         });
         bodyHTML += '</div>';
         if (mainDocs.length > 1) {
-          bodyHTML += `<div style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="downloadAll('${ph.key}')">⬇ Tout télécharger</button></div>`;
+          bodyHTML += `<div style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="downloadAll('${ph.key}')">â¬ Tout tÃ©lÃ©charger</button></div>`;
         }
       } else if (!specTypes.length) {
         bodyHTML += `<div class="docs-empty">Aucun document disponible pour cette phase.</div>`;
@@ -601,15 +771,15 @@ function renderPhases() {
     item.id = `ph-${ph.key}`;
     item.innerHTML = `
       <div class="phase-header" onclick="${locked?'':` togglePhase('${ph.key}')`}">
-        <div class="phase-num">${completed?'✓':num}</div>
+        <div class="phase-num">${completed?'â':num}</div>
         <div class="phase-info">
           <div class="phase-label">${ph.icon} ${ph.label}</div>
           <div class="phase-desc">${ph.desc}</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px">
-          ${locked ? '<span>🔒</span>' : ''}
-          ${completed ? '<span class="badge badge-green">✓ Terminé</span>' : ''}
-          ${!locked ? '<span class="phase-chevron">⌄</span>' : ''}
+          ${locked ? '<span>ð</span>' : ''}
+          ${completed ? '<span class="badge badge-green">â TerminÃ©</span>' : ''}
+          ${!locked ? '<span class="phase-chevron">â</span>' : ''}
         </div>
       </div>
       <div class="phase-content">${bodyHTML}</div>`;
@@ -649,16 +819,16 @@ async function downloadDoc(docId, fileName) {
 }
 
 async function downloadAll(phaseKey) {
-  toast('Préparation…','info');
+  toast('PrÃ©parationâ¦','info');
   for (const doc of (docsMap[phaseKey]||[])) {
     const { data } = await sb.storage.from('client-documents').createSignedUrl(doc.storage_path, 300);
     if (data?.signedUrl) { const a=document.createElement('a'); a.href=data.signedUrl; a.download=doc.file_name||doc.title; a.click(); await sleep(600); }
   }
-  toast('Documents téléchargés !','success');
+  toast('Documents tÃ©lÃ©chargÃ©s !','success');
 }
 
 // ============================================================
-// ADMIN — LOAD
+// ADMIN â LOAD
 // ============================================================
 async function loadAdminData() {
   await Promise.all([loadAdminStats(), loadAdminClients(), loadAdminProjectSelects()]);
@@ -680,7 +850,7 @@ async function loadAdminStats() {
 async function loadAdminClients() {
   const { data:clients } = await sbAdmin.from('clients').select('*, projects(id,name,status)').order('created_at',{ascending:false});
   const container = document.getElementById('admin-client-list');
-  if (!clients?.length) { container.innerHTML=`<div class="empty-state"><div class="es-icon">👥</div><h3>Aucun client</h3><p>Créez votre premier client ci-dessus.</p></div>`; return; }
+  if (!clients?.length) { container.innerHTML=`<div class="empty-state"><div class="es-icon">ð¥</div><h3>Aucun client</h3><p>CrÃ©ez votre premier client ci-dessus.</p></div>`; return; }
   container.innerHTML = clients.map(c => {
     const proj = c.projects?.[0];
     return `<div class="client-card">
@@ -690,7 +860,7 @@ async function loadAdminClients() {
         <div class="client-card-email">${c.email}${proj?` <span class="phase-tag">${proj.name}</span>`:''}</div>
       </div>
       <div style="display:flex;gap:8px">
-        ${proj?`<button class="btn btn-ghost btn-sm" onclick="quickGoPhases('${proj.id}')">Gérer phases →</button>`:''}
+        ${proj?`<button class="btn btn-ghost btn-sm" onclick="quickGoPhases('${proj.id}')">GÃ©rer phases â</button>`:''}
       </div>
     </div>`;
   }).join('');
@@ -699,10 +869,10 @@ async function loadAdminClients() {
 async function loadAdminProjectSelects() {
   const { data:projects } = await sbAdmin.from('projects').select('*, clients(full_name)').order('created_at',{ascending:false});
   adminProjects = projects || [];
-  const opts = '<option value="">— Sélectionner un projet —</option>' +
+  const opts = '<option value="">â SÃ©lectionner un projet â</option>' +
     adminProjects.map(p=>`<option value="${p.id}">${p.name} (${p.clients?.full_name||'?'})</option>`).join('');
-  ['proj-select-project','phases-project-select','docs-proj-select'].forEach(id=>{
-    const s=document.getElementById(id); const cur=s.value; s.innerHTML=opts; if(cur) s.value=cur;
+  ['proj-select-project','phases-project-select','docs-proj-select','shopping-proj-select'].forEach(id=>{
+    const s=document.getElementById(id); if(!s) return; const cur=s.value; s.innerHTML=opts; if(cur) s.value=cur;
   });
 }
 
@@ -713,7 +883,7 @@ function quickGoPhases(projId) {
 }
 
 // ============================================================
-// ADMIN — CREATE CLIENT
+// ADMIN â CREATE CLIENT
 // ============================================================
 async function createClient() {
   const name     = v('nc-name'), email    = v('nc-email'),
@@ -721,7 +891,7 @@ async function createClient() {
         notes    = v('nc-notes'), projName = v('nc-proj-name'),
         projAddr = v('nc-proj-addr'), password = v('nc-password');
   if (!name||!email||!projName||!password) { toast('Nom, email, projet et mot de passe requis.','error'); return; }
-  if (password.length<8) { toast('Mot de passe : 8 caractères minimum.','error'); return; }
+  if (password.length<8) { toast('Mot de passe : 8 caractÃ¨res minimum.','error'); return; }
   try {
     const { data:authData, error:authErr } = await sbAdmin.auth.admin.createUser({ email, password, email_confirm:true });
     if (authErr) throw new Error(authErr.message);
@@ -731,7 +901,7 @@ async function createClient() {
     if (pErr) throw new Error(pErr.message);
     const phInserts = PHASES.map((ph,i)=>({ project_id:pRow.id, phase_key:ph.key, is_enabled:true, is_locked:true, is_completed:false, sort_order:i }));
     await sbAdmin.from('phase_configs').insert(phInserts);
-    toast(`Client "${name}" créé ! Identifiants : ${email} / ${password}`,'success');
+    toast(`Client "${name}" crÃ©Ã© ! Identifiants : ${email} / ${password}`,'success');
     clearClientForm();
     await loadAdminData();
   } catch(e) { toast('Erreur : '+e.message,'error'); }
@@ -740,7 +910,7 @@ function clearClientForm() { ['nc-name','nc-email','nc-phone','nc-address','nc-n
 function v(id) { return document.getElementById(id).value.trim(); }
 
 // ============================================================
-// ADMIN — PROJECT EDIT
+// ADMIN â PROJECT EDIT
 // ============================================================
 function onProjectTabChange() {
   const projId = document.getElementById('proj-select-project').value;
@@ -759,12 +929,12 @@ async function saveProject() {
   if (!selectedProjId) return;
   const { error } = await sbAdmin.from('projects').update({ name:v('ep-name'), property_address:v('ep-addr'), status:document.getElementById('ep-status').value, description:v('ep-desc'), updated_at:new Date().toISOString() }).eq('id',selectedProjId);
   if (error) { toast('Erreur : '+error.message,'error'); return; }
-  toast('Projet mis à jour !','success');
+  toast('Projet mis Ã  jour !','success');
   await loadAdminProjectSelects();
 }
 
 // ============================================================
-// ADMIN — PHASES
+// ADMIN â PHASES
 // ============================================================
 async function onPhasesProjectChange() {
   const projId = document.getElementById('phases-project-select').value;
@@ -781,15 +951,15 @@ async function onPhasesProjectChange() {
       <div class="pc-label">${ph.icon} ${ph.label} ${isOpt?'<span class="badge badge-gray" style="font-size:10px">Option</span>':''}</div>
       <div class="pc-controls">
         <div class="toggle-group">
-          <label>Activé</label>
+          <label>ActivÃ©</label>
           <label class="toggle-switch"><input type="checkbox" id="pc-en-${ph.key}" ${cfg.is_enabled?'checked':''}><span class="toggle-slider"></span></label>
         </div>
         <div class="toggle-group">
-          <label>Déverrouillé</label>
+          <label>DÃ©verrouillÃ©</label>
           <label class="toggle-switch"><input type="checkbox" id="pc-un-${ph.key}" ${!cfg.is_locked?'checked':''}><span class="toggle-slider"></span></label>
         </div>
         <div class="toggle-group">
-          <label>Terminé</label>
+          <label>TerminÃ©</label>
           <label class="toggle-switch"><input type="checkbox" id="pc-dn-${ph.key}" ${cfg.is_completed?'checked':''}><span class="toggle-slider"></span></label>
         </div>
       </div>
@@ -810,21 +980,21 @@ async function savePhaseConfigs() {
   }));
   const { error } = await sbAdmin.from('phase_configs').upsert(upserts,{onConflict:'project_id,phase_key'});
   if (error) { toast('Erreur : '+error.message,'error'); return; }
-  toast('Phases enregistrées !','success');
+  toast('Phases enregistrÃ©es !','success');
   await loadAdminStats();
 }
 
 // ============================================================
-// ADMIN — DOCUMENTS
+// ADMIN â DOCUMENTS
 // ============================================================
 async function onDocsProjectChange() {
   const projId = document.getElementById('docs-proj-select').value;
   const panel  = document.getElementById('docs-upload-panel');
   if (!projId) { panel.classList.add('hidden'); return; }
   const phSel = document.getElementById('docs-phase-select');
-  phSel.innerHTML = '<option value="">— Phase —</option>' + PHASES.map(ph=>`<option value="${ph.key}">${ph.icon} ${ph.label}</option>`).join('');
+  phSel.innerHTML = '<option value="">â Phase â</option>' + PHASES.map(ph=>`<option value="${ph.key}">${ph.icon} ${ph.label}</option>`).join('');
   panel.classList.remove('hidden');
-  document.getElementById('admin-docs-list').innerHTML = '<div class="docs-empty">Sélectionnez une phase.</div>';
+  document.getElementById('admin-docs-list').innerHTML = '<div class="docs-empty">SÃ©lectionnez une phase.</div>';
 }
 
 async function loadAdminDocs() {
@@ -836,34 +1006,34 @@ async function loadAdminDocs() {
   if (!docs?.length) { c.innerHTML='<div class="docs-empty">Aucun document pour cette phase.</div>'; return; }
   c.innerHTML = '<div class="docs-grid">' + docs.map(d=>`
     <div class="doc-item">
-      <div class="doc-icon">${DOC_ICONS[d.doc_type]||'📄'}</div>
+      <div class="doc-icon">${DOC_ICONS[d.doc_type]||'ð'}</div>
       <div class="doc-info">
         <div class="doc-title">${d.title}</div>
-        <div class="doc-meta">${d.doc_type} · ${d.file_size?fmtBytes(d.file_size):'—'} · ${new Date(d.uploaded_at).toLocaleDateString('fr-FR')}</div>
+        <div class="doc-meta">${d.doc_type} Â· ${d.file_size?fmtBytes(d.file_size):'â'} Â· ${new Date(d.uploaded_at).toLocaleDateString('fr-FR')}</div>
       </div>
       <div class="doc-actions">
-        <button class="btn btn-danger btn-sm" onclick="deleteDocument('${d.id}','${esc(d.storage_path)}')">🗑</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteDocument('${d.id}','${esc(d.storage_path)}')">ð</button>
       </div>
     </div>`).join('') + '</div>';
 }
 
 async function deleteDocument(docId, storagePath) {
-  if (!confirm('Supprimer ce document définitivement ?')) return;
+  if (!confirm('Supprimer ce document dÃ©finitivement ?')) return;
   await sbAdmin.storage.from('client-documents').remove([storagePath]);
   await sbAdmin.from('documents').delete().eq('id',docId);
-  toast('Document supprimé.','success');
+  toast('Document supprimÃ©.','success');
   await loadAdminDocs();
   await loadAdminStats();
 }
 
 function onFileSelected(e) {
   selectedFile = e.target.files[0];
-  if (selectedFile) document.getElementById('selected-file-name').textContent = `📎 ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
+  if (selectedFile) document.getElementById('selected-file-name').textContent = `ð ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
 }
 function onFileDrop(e) {
   e.preventDefault(); document.getElementById('upload-area').classList.remove('drag-over');
   selectedFile = e.dataTransfer.files[0];
-  if (selectedFile) document.getElementById('selected-file-name').textContent = `📎 ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
+  if (selectedFile) document.getElementById('selected-file-name').textContent = `ð ${selectedFile.name} (${fmtBytes(selectedFile.size)})`;
 }
 
 async function uploadDocument() {
@@ -872,11 +1042,11 @@ async function uploadDocument() {
   const title    = v('doc-title');
   const docType  = document.getElementById('doc-type').value;
   const desc     = v('doc-desc');
-  if (!projId||!phaseKey) { toast('Sélectionnez un projet et une phase.','error'); return; }
+  if (!projId||!phaseKey) { toast('SÃ©lectionnez un projet et une phase.','error'); return; }
   if (!title) { toast('Le titre est requis.','error'); return; }
-  if (!selectedFile) { toast('Sélectionnez un fichier.','error'); return; }
+  if (!selectedFile) { toast('SÃ©lectionnez un fichier.','error'); return; }
   const btn = document.getElementById('upload-btn');
-  btn.disabled=true; btn.textContent='Upload…';
+  btn.disabled=true; btn.textContent='Uploadâ¦';
   const prog = document.getElementById('upload-progress');
   const bar  = document.getElementById('upload-progress-bar');
   prog.style.display='block'; bar.style.width='0%';
@@ -889,23 +1059,265 @@ async function uploadDocument() {
     bar.style.width='100%';
     const { error:dbErr } = await sbAdmin.from('documents').insert({ project_id:projId, phase_key:phaseKey, doc_type:docType, title, description:desc, storage_path:storagePath, file_name:selectedFile.name, file_size:selectedFile.size, mime_type:selectedFile.type, uploaded_by:currentUser?.email });
     if (dbErr) throw new Error(dbErr.message);
-    toast('Document uploadé !','success');
+    toast('Document uploadÃ© !','success');
     ['doc-title','doc-desc'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('doc-file-input').value='';
     document.getElementById('selected-file-name').textContent='';
     selectedFile=null; prog.style.display='none'; bar.style.width='0%';
     await loadAdminDocs(); await loadAdminStats();
   } catch(e) { toast('Erreur : '+e.message,'error'); prog.style.display='none'; }
-  btn.disabled=false; btn.textContent='⬆ Uploader';
+  btn.disabled=false; btn.textContent='â¬ Uploader';
 }
 
 // ============================================================
-// ADMIN — TABS
+// PORTAL â TAB SWITCH
+// ============================================================
+function switchPortalTab(tab, el) {
+  document.querySelectorAll('.portal-nav-btn').forEach(b=>b.classList.remove('active'));
+  if(el) el.classList.add('active');
+  document.getElementById('portal-section-phases').classList.toggle('hidden', tab!=='phases');
+  document.getElementById('portal-section-shopping').classList.toggle('hidden', tab!=='shopping');
+}
+
+// ============================================================
+// SHOPPING â CLIENT
+// ============================================================
+function renderShoppingItems() {
+  const container = document.getElementById('shopping-client-content');
+  if (!shoppingItems.length) {
+    container.innerHTML = `<div class="shopping-empty"><div style="font-size:36px;margin-bottom:12px">ð</div><p>Votre shopping liste sera disponible ici.<br>Votre designer prÃ©pare vos sÃ©lections.</p></div>`;
+    return;
+  }
+  // Group by category
+  const groups = {};
+  shoppingItems.forEach(item => {
+    const cat = item.category || 'GÃ©nÃ©ral';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(item);
+  });
+  // Compute totals
+  const totals = { pending:0, validated:0, refused:0, totalVal:0 };
+  shoppingItems.forEach(item => {
+    totals[item.client_status || 'pending']++;
+    if (item.client_status === 'validated') totals.totalVal += parseFloat(item.price||0);
+  });
+  let html = '';
+  Object.entries(groups).forEach(([cat, items]) => {
+    html += `<div class="shopping-category-title">${cat}</div><div class="shopping-grid">`;
+    items.forEach(item => {
+      const status = item.client_status || 'pending';
+      const photoHTML = item.photo_url
+        ? `<img src="${item.photo_url}" alt="${esc(item.name)}" />`
+        : 'ð';
+      const linkHTML = item.link_enabled && item.purchase_link
+        ? `<a href="${item.purchase_link}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">ð Voir le produit</a>`
+        : '';
+      const footerHTML = (item.client_alternative || item.client_comment)
+        ? `<div class="shopping-card-footer">
+            ${item.client_alternative ? `<span class="shopping-card-alternative">â Alternative : ${item.client_alternative}</span>` : ''}
+            ${item.client_comment ? `<span style="margin-top:${item.client_alternative?'4px':'0'}">${item.client_comment}</span>` : ''}
+           </div>` : '';
+      html += `<div class="shopping-card status-${status}" id="sh-card-${item.id}">
+        <div class="shopping-card-body">
+          <div class="shopping-card-photo">${photoHTML}</div>
+          <div class="shopping-card-info">
+            <div class="shopping-card-name">${item.name}</div>
+            ${item.reference ? `<div class="shopping-card-ref">RÃ©f. ${item.reference}</div>` : ''}
+            <div class="shopping-card-price">${parseFloat(item.price||0).toLocaleString('fr-FR',{minimumFractionDigits:2})} â¬</div>
+          </div>
+          <div class="shopping-card-actions">
+            ${linkHTML}
+            <button class="btn btn-validate btn-sm${status==='validated'?' active':''}" onclick="updateShoppingStatus('${item.id}','validated')">â Valider</button>
+            <button class="btn btn-refuse btn-sm${status==='refused'?' active':''}" onclick="updateShoppingStatus('${item.id}','refused')">â Refuser</button>
+            <button class="btn btn-ghost btn-sm" onclick="openShoppingModal('${item.id}')" title="Commenter / proposer une alternative">ð¬</button>
+          </div>
+        </div>
+        ${footerHTML}
+      </div>`;
+    });
+    html += '</div>';
+  });
+  // Totals bar
+  html += `<div class="shopping-totals">
+    <div class="shopping-total-item">
+      <div class="shopping-total-value">${totals.pending}</div>
+      <div class="shopping-total-label">En attente</div>
+    </div>
+    <div class="shopping-total-item">
+      <div class="shopping-total-value" style="color:var(--green)">${totals.validated}</div>
+      <div class="shopping-total-label">ValidÃ©s</div>
+    </div>
+    <div class="shopping-total-item">
+      <div class="shopping-total-value" style="color:var(--red)">${totals.refused}</div>
+      <div class="shopping-total-label">RefusÃ©s</div>
+    </div>
+    <div class="shopping-total-item shopping-total-main">
+      <div class="shopping-total-value">${totals.totalVal.toLocaleString('fr-FR',{minimumFractionDigits:2})} â¬</div>
+      <div class="shopping-total-label">Total validÃ©</div>
+    </div>
+  </div>`;
+  container.innerHTML = html;
+}
+
+async function updateShoppingStatus(itemId, newStatus) {
+  const item = shoppingItems.find(i=>i.id===itemId);
+  if (!item) return;
+  // Toggle off if already same status
+  const status = item.client_status === newStatus ? 'pending' : newStatus;
+  const { error } = await sb.from('shopping_items').update({ client_status: status }).eq('id', itemId);
+  if (error) { toast('Erreur : ' + error.message, 'error'); return; }
+  item.client_status = status;
+  renderShoppingItems();
+}
+
+function openShoppingModal(itemId) {
+  currentShoppingItemId = itemId;
+  const item = shoppingItems.find(i=>i.id===itemId);
+  if (!item) return;
+  document.getElementById('shopping-modal-item-name').textContent = item.name;
+  document.getElementById('shopping-modal-alternative').value = item.client_alternative || '';
+  document.getElementById('shopping-modal-comment').value = item.client_comment || '';
+  document.getElementById('shopping-modal').classList.remove('hidden');
+}
+
+function closeShoppingModal() {
+  document.getElementById('shopping-modal').classList.add('hidden');
+  currentShoppingItemId = null;
+}
+
+async function saveShoppingFeedback() {
+  if (!currentShoppingItemId) return;
+  const alt = document.getElementById('shopping-modal-alternative').value.trim();
+  const comment = document.getElementById('shopping-modal-comment').value.trim();
+  const { error } = await sb.from('shopping_items').update({ client_alternative: alt, client_comment: comment }).eq('id', currentShoppingItemId);
+  if (error) { toast('Erreur : ' + error.message, 'error'); return; }
+  const item = shoppingItems.find(i=>i.id===currentShoppingItemId);
+  if (item) { item.client_alternative = alt; item.client_comment = comment; }
+  closeShoppingModal();
+  renderShoppingItems();
+  toast('Commentaire enregistrÃ© !', 'success');
+}
+
+document.getElementById('shopping-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('shopping-modal')) closeShoppingModal();
+});
+
+// ============================================================
+// SHOPPING â ADMIN
+// ============================================================
+async function onShoppingProjectChange() {
+  const projId = document.getElementById('shopping-proj-select').value;
+  const panel = document.getElementById('shopping-admin-panel');
+  if (!projId) { panel.classList.add('hidden'); return; }
+  panel.classList.remove('hidden');
+  await loadAdminShoppingItems(projId);
+}
+
+async function loadAdminShoppingItems(projId) {
+  const pid = projId || document.getElementById('shopping-proj-select').value;
+  if (!pid) return;
+  const { data:items } = await sbAdmin.from('shopping_items').select('*').eq('project_id', pid).order('sort_order');
+  const list = document.getElementById('shopping-admin-list');
+  const count = document.getElementById('sh-admin-count');
+  if (!items?.length) {
+    list.innerHTML = '<div class="docs-empty">Aucun article pour ce projet. Ajoutez-en un ci-dessus.</div>';
+    count.textContent = '';
+    return;
+  }
+  count.textContent = `${items.length} article${items.length>1?'s':''}`;
+  const statusLabels = { pending:'â³ En attente', validated:'â ValidÃ©', refused:'â RefusÃ©' };
+  list.innerHTML = `<div class="shopping-admin-grid">${items.map(item => {
+    const photoHTML = item.photo_url ? `<img src="${item.photo_url}" alt="" />` : 'ð';
+    return `<div class="shopping-admin-card">
+      <div class="shopping-admin-photo">${photoHTML}</div>
+      <div class="shopping-admin-info">
+        <div class="shopping-admin-name" title="${esc(item.name)}">${item.name}</div>
+        <div class="shopping-admin-price">${parseFloat(item.price||0).toLocaleString('fr-FR',{minimumFractionDigits:2})} â¬</div>
+        <div class="shopping-admin-meta">${item.category||'GÃ©nÃ©ral'}${item.reference?' Â· RÃ©f. '+item.reference:''}</div>
+        <span class="shopping-admin-status status-${item.client_status||'pending'}">${statusLabels[item.client_status||'pending']}</span>
+        ${item.client_alternative ? `<div class="shopping-admin-meta" style="margin-top:4px;color:var(--gold)">â ${item.client_alternative}</div>` : ''}
+        ${item.client_comment ? `<div class="shopping-admin-meta" style="margin-top:2px">"${item.client_comment}"</div>` : ''}
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="deleteShoppingItem('${item.id}')" style="flex-shrink:0;align-self:flex-start">ð</button>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+async function saveShoppingItem() {
+  const projId = document.getElementById('shopping-proj-select').value;
+  if (!projId) { toast('SÃ©lectionnez un projet.', 'error'); return; }
+  const name = document.getElementById('sh-name').value.trim();
+  if (!name) { toast('Le nom de l\'article est requis.', 'error'); return; }
+  const ref      = document.getElementById('sh-ref').value.trim();
+  const category = document.getElementById('sh-category').value;
+  const price    = parseFloat(document.getElementById('sh-price').value) || 0;
+  const link     = document.getElementById('sh-link').value.trim();
+  const linkEnabled = document.getElementById('sh-link-enabled').checked;
+  const btn = document.querySelector('[onclick="saveShoppingItem()"]');
+  btn.disabled = true; btn.textContent = 'Enregistrementâ¦';
+  try {
+    let photoUrl = null;
+    if (selectedShoppingPhoto) {
+      const path = `shopping/${projId}/${Date.now()}-${selectedShoppingPhoto.name}`;
+      const { error:upErr } = await sbAdmin.storage.from('client-documents').upload(path, selectedShoppingPhoto, { cacheControl:'3600', upsert:false });
+      if (upErr) throw new Error(upErr.message);
+      const { data:urlData } = sbAdmin.storage.from('client-documents').getPublicUrl(path);
+      photoUrl = urlData?.publicUrl || null;
+    }
+    const { data:countData } = await sbAdmin.from('shopping_items').select('sort_order', {count:'exact'}).eq('project_id', projId);
+    const sortOrder = countData?.length || 0;
+    const { error } = await sbAdmin.from('shopping_items').insert({
+      project_id: projId, name, reference: ref||null, category, price,
+      photo_url: photoUrl, purchase_link: link||null, link_enabled: linkEnabled, sort_order: sortOrder
+    });
+    if (error) throw new Error(error.message);
+    toast(`Article "${name}" ajoutÃ© !`, 'success');
+    clearShoppingForm();
+    await loadAdminShoppingItems(projId);
+  } catch(e) { toast('Erreur : ' + e.message, 'error'); }
+  btn.disabled = false; btn.textContent = 'â Ajouter l\'article';
+}
+
+async function deleteShoppingItem(itemId) {
+  if (!confirm('Supprimer cet article dÃ©finitivement ?')) return;
+  await sbAdmin.from('shopping_items').delete().eq('id', itemId);
+  toast('Article supprimÃ©.', 'success');
+  await loadAdminShoppingItems(document.getElementById('shopping-proj-select').value);
+}
+
+function onShoppingPhotoSelected(e) {
+  selectedShoppingPhoto = e.target.files[0];
+  if (!selectedShoppingPhoto) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('sh-photo-preview').innerHTML =
+      `<img src="${ev.target.result}" style="width:60px;height:60px;object-fit:cover;border-radius:6px;" /><span style="font-size:13px;color:var(--gold)">${selectedShoppingPhoto.name}</span>`;
+  };
+  reader.readAsDataURL(selectedShoppingPhoto);
+}
+
+function clearShoppingForm() {
+  ['sh-name','sh-ref','sh-price','sh-link'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('sh-category').value = 'GÃ©nÃ©ral';
+  document.getElementById('sh-link-enabled').checked = true;
+  document.getElementById('sh-photo-preview').innerHTML = `<span style="font-size:24px">ð¼</span><span style="font-size:13px;color:var(--gray)">Cliquez pour ajouter une photo (JPG, PNG, WebP)</span>`;
+  document.getElementById('sh-photo-input').value = '';
+  selectedShoppingPhoto = null;
+}
+
+// Toggle lien field visibility
+document.getElementById('sh-link-enabled').addEventListener('change', function() {
+  document.getElementById('sh-link-field').style.opacity = this.checked ? '1' : '0.4';
+});
+
+// ============================================================
+// ADMIN â TABS
 // ============================================================
 function switchAdminTab(tab, el) {
   document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
   if(el) el.classList.add('active');
-  ['clients','project','phases','documents'].forEach(t=>{ document.getElementById(`admin-tab-${t}`).classList.toggle('hidden',t!==tab); });
+  ['clients','project','phases','documents','shopping'].forEach(t=>{ document.getElementById(`admin-tab-${t}`).classList.toggle('hidden',t!==tab); });
+  if (tab === 'shopping') loadAdminProjectSelects();
 }
 
 // ============================================================
@@ -923,7 +1335,7 @@ function toast(msg, type='info') {
   const c=document.getElementById('toast-container');
   const el=document.createElement('div');
   el.className=`toast toast-${type}`;
-  el.innerHTML=`<span>${{success:'✓',error:'✕',info:'ℹ'}[type]||'•'}</span><span>${msg}</span>`;
+  el.innerHTML=`<span>${{success:'â',error:'â',info:'â¹'}[type]||'â¢'}</span><span>${msg}</span>`;
   c.appendChild(el);
   setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity 0.3s'; setTimeout(()=>el.remove(),300); },5000);
 }
