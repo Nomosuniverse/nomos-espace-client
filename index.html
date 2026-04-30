@@ -286,11 +286,11 @@
 <div id="page-portal" class="hidden">
   <header class="portal-header">
     <div style="display:flex;align-items:center;gap:20px">
-      <div><p class="logo" style="font-size:12px;letter-spacing:4px">NOMOS UNIVERSE</p><p class="logo-sub">ESPACE CLIENT5�n>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <span style="font-size:13px;color:var(--gray)">Bonjour, <strong id="portal-client-name" style="color:var(--white)">—</strong></span>
-        <button type="button" class="btn btn-sm" onclick="doLogout()" style="background:rgba(229,57,53,0.15);color:#ef5350;border:1px solid rgba(229,57,53,0.4);cursor:pointer;">⏻ Déconnexion</button>
+      <div><p class="logo" style="font-size:12px;letter-spacing:4px">NOMOS UNIVERSE</p><p class="logo-sub">ESPACE CLIENT</p></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span style="font-size:13px;color:var(--gray)">Bonjour, <strong id="portal-client-name" style="color:var(--white)">—</strong></span>
+      <button type="button" class="btn btn-sm" onclick="doLogout()" style="background:rgba(229,57,53,0.15);color:#ef5350;border:1px solid rgba(229,57,53,0.4);cursor:pointer;">⏻ Déconnexion</button>
     </div>
   </header>
   <div class="portal-body">
@@ -306,13 +306,6 @@
     <div id="portal-section-phases">
       <p class="phases-title">Suivi de votre projet</p>
       <div class="phases-grid" id="phases-container"></div>
-    </div>
-    <!-- SHOPPING section — indépendante, toujours visible -->
-    <div id="portal-section-shopping">
-      <p class="phases-title" style="margin-top:32px">🛒 Sélections Shopping</p>
-      <div id="shopping-client-content">
-        <div class="shopping-empty"><div style="font-size:36px;margin-bottom:12px">🛒</div><p>Votre shopping liste sera disponible ici.<br>Votre designer prépare vos sélections.</p></div>
-      </div>
     </div>
   </div>
 </div>
@@ -583,6 +576,7 @@ const PHASES = [
   { key:'travaux',               label:'Travaux',                    icon:'🔨', desc:'Réalisation des travaux selon le planning établi' },
   { key:'livraison',             label:'Livraison du Chantier',      icon:'🎁', desc:'Livraison et réception officielle de votre espace rénové' },
   { key:'installation',          label:'Installation',               icon:'🪴', desc:'Installation du mobilier et accessoires (option)' },
+  { key:'shopping',              label:'Sélections Shopping',        icon:'🛒', desc:'Votre designer prépare vos sélections produits' },
 ];
 const SPECIAL = { conception_3d:['plan_2d','shopping_liste'], travaux:['planning_travaux'] };
 const STATUS_LABELS = { en_cours:'En cours', termine:'Terminé', suspendu:'Suspendu', pause:'En pause' };
@@ -713,6 +707,8 @@ function renderPhases() {
     let bodyHTML = '';
     if (locked) {
       bodyHTML = `<div class="lock-overlay"><span style="font-size:20px">🔒</span><span>Cette phase n'est pas encore accessible. Contactez votre designer pour plus d'informations.</span></div>`;
+    } else if (ph.key === 'shopping') {
+      bodyHTML = `<div id="shopping-client-content"></div>`;
     } else {
       // Special items
       if (specTypes.length) {
@@ -846,7 +842,7 @@ async function loadAdminStats() {
 async function loadAdminClients() {
   const { data:clients } = await sbAdmin.from('clients').select('*, projects(id,name,status)').order('created_at',{ascending:false});
   const container = document.getElementById('admin-client-list');
-  if (!clients?.length) { container.innerHTML<`<div class="empty-state"><div class="es-icon">👥</div><h3>Aucun client</h3><p>Créez votre premier client ci-dessus.</p></div>`; return; }
+  if (!clients?.length) { container.innerHTML=`<div class="empty-state"><div class="es-icon">👥</div><h3>Aucun client</h3><p>Créez votre premier client ci-dessus.</p></div>`; return; }
   container.innerHTML = clients.map(c => {
     const proj = c.projects?.[0];
     return `<div class="client-card">
@@ -1071,8 +1067,6 @@ async function uploadDocument() {
 function switchPortalTab(tab, el) {
   document.querySelectorAll('.portal-nav-btn').forEach(b=>b.classList.remove('active'));
   if(el) el.classList.add('active');
-  document.getElementById('portal-section-phases').classList.toggle('hidden', tab!=='phases');
-  document.getElementById('portal-section-shopping').classList.toggle('hidden', tab!=='shopping');
 }
 
 // ============================================================
@@ -1080,6 +1074,7 @@ function switchPortalTab(tab, el) {
 // ============================================================
 function renderShoppingItems() {
   const container = document.getElementById('shopping-client-content');
+  if (!container) return; // phase désactivée ou verrouillée
   if (!shoppingItems.length) {
     container.innerHTML = `<div class="shopping-empty"><div style="font-size:36px;margin-bottom:12px">🛒</div><p>Votre shopping liste sera disponible ici.<br>Votre designer prépare vos sélections.</p></div>`;
     return;
@@ -1119,7 +1114,7 @@ function renderShoppingItems() {
           <div class="shopping-card-info">
             <div class="shopping-card-name">${item.name}</div>
             ${item.reference ? `<div class="shopping-card-ref">Réf. ${item.reference}</div>` : ''}
-            <div class="shopping-card-price">${parseFloat(item.price||0).toLocaleString('fr-FR',{minimumFractionDigits:2})} €</div>
+            <div class="shopping-card-price">${parseFloat(item.price||0).toLocaleString('fr-FR',{minimumFractionDigits:3})} €</div>
           </div>
           <div class="shopping-card-actions">
             ${linkHTML}
@@ -1299,9 +1294,7 @@ function clearShoppingForm() {
   document.getElementById('sh-photo-preview').innerHTML = `<span style="font-size:24px">🖼</span><span style="font-size:13px;color:var(--gray)">Cliquez pour ajouter une photo (JPG, PNG, WebP)</span>`;
   document.getElementById('sh-photo-input').value = '';
   selectedShoppingPhoto = null;
-}
-
-// Toggle lien field visibility
+}n field visibility
 document.getElementById('sh-link-enabled').addEventListener('change', function() {
   document.getElementById('sh-link-field').style.opacity = this.checked ? '1' : '0.4';
 });
