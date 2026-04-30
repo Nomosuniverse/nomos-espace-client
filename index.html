@@ -1315,7 +1315,7 @@ function switchAdminTab(tab, el) {
 // UTILS
 // ============================================================
 function showPage(name) {
-  ['loading-screen','page-login','page-portal','page-admin'].forEach('id=>{
+  ['loading-screen','page-login','page-portal','page-admin'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.classList.add('hidden');
   });
   const map = { login:'page-login', portal:'page-portal', admin:'page-admin', loading:'loading-screen' };
@@ -1332,7 +1332,7 @@ function toast(msg, type='info') {
 }
 function fmtBytes(b) { if(!b) return ''; if(b<1024) return b+' B'; if(b<1048576) return (b/1024).toFixed(1)+' KB'; return (b/1048576).toFixed(1)+' MB'; }
 function esc(s) { return (s||'').replace(/'/g,"\\'"); }
-function sleep(ms) { return new Promise(r=>setTimeout(r,ls)); }
+function sleep(ms) { return new Promise(r=>setTimeout(r,ms)); }
 
 // BOOT
 init();
