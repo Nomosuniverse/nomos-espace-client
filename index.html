@@ -1114,7 +1114,7 @@ function renderShoppingItems() {
           <div class="shopping-card-info">
             <div class="shopping-card-name">${item.name}</div>
             ${item.reference ? `<div class="shopping-card-ref">Réf. ${item.reference}</div>` : ''}
-            <div class="shopping-card-price">${parseFloat(item.price||0).toLocaleString('fr-FR',{minimumFractionDigits:3})} €</div>
+            <div class="shopping-card-price">${parseFloat(item.price||0).toLocaleString('fr-FR',{minimumFractionDigits:2})} €</div>
           </div>
           <div class="shopping-card-actions">
             ${linkHTML}
@@ -1294,7 +1294,9 @@ function clearShoppingForm() {
   document.getElementById('sh-photo-preview').innerHTML = `<span style="font-size:24px">🖼</span><span style="font-size:13px;color:var(--gray)">Cliquez pour ajouter une photo (JPG, PNG, WebP)</span>`;
   document.getElementById('sh-photo-input').value = '';
   selectedShoppingPhoto = null;
-}n field visibility
+}
+
+// Toggle lien field visibility
 document.getElementById('sh-link-enabled').addEventListener('change', function() {
   document.getElementById('sh-link-field').style.opacity = this.checked ? '1' : '0.4';
 });
@@ -1313,7 +1315,7 @@ function switchAdminTab(tab, el) {
 // UTILS
 // ============================================================
 function showPage(name) {
-  ['loading-screen','page-login','page-portal','page-admin'].forEach(id=>{
+  ['loading-screen','page-login','page-portal','page-admin'].forEach('id=>{
     const el=document.getElementById(id); if(el) el.classList.add('hidden');
   });
   const map = { login:'page-login', portal:'page-portal', admin:'page-admin', loading:'loading-screen' };
@@ -1324,13 +1326,13 @@ function toast(msg, type='info') {
   const c=document.getElementById('toast-container');
   const el=document.createElement('div');
   el.className=`toast toast-${type}`;
-  el.innerHTML<`<span>${{success:'✓',error:'✕',info:'ℹ'}[type]||'•'}</span><span>${msg}</span>`;
+  el.innerHTML=`<span>${{success:'✓',error:'✕',info:'ℹ'}[type]||'•'}</span><span>${msg}</span>`;
   c.appendChild(el);
   setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity 0.3s'; setTimeout(()=>el.remove(),300); },5000);
 }
 function fmtBytes(b) { if(!b) return ''; if(b<1024) return b+' B'; if(b<1048576) return (b/1024).toFixed(1)+' KB'; return (b/1048576).toFixed(1)+' MB'; }
 function esc(s) { return (s||'').replace(/'/g,"\\'"); }
-function sleep(ms) { return new Promise(r=>setTimeout(r,ms)); }
+function sleep(ms) { return new Promise(r=>setTimeout(r,ls)); }
 
 // BOOT
 init();
